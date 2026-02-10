@@ -1,0 +1,48 @@
+{
+  "name": "cucumbertrade-docs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CucumberTrade Documentation - The ultimate trading infrastructure for modern finance",
+  "author": "CucumberTrade",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "^16.1.6",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-scroll-area": "^1.2.10",
+    "@types/mdx": "^2.0.13",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "flexsearch": "^0.8.212",
+    "framer-motion": "^12.34.0",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.563.0",
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "reading-time": "^1.5.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-pretty-code": "^0.14.1",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "shiki": "^3.22.0",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/flexsearch": "^0.7.6",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.6",
+    "@types/react-dom": "^19.0.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
+  }
+}

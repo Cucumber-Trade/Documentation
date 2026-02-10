@@ -1,0 +1,22 @@
+{
+  "name": "Documentation",
+  "short_name": "Docs",
+  "description": "Documentation Platform",
+  "icons": [
+    {
+      "src": "/assets/favicons/Favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/assets/logos/Logo Symbol.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#04070B",
+  "background_color": "#04070B",
+  "display": "standalone",
+  "start_url": "/"
+}

@@ -1,0 +1,6 @@
+# Stay out of the parent directory
+../
+
+# Hide sensitive local files
+.env
+*.log
