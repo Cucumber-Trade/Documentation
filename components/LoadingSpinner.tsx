@@ -10,7 +10,7 @@ export default function LoadingSpinner() {
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
       >
-        <div className="absolute inset-0 border-4 border-zinc-800 rounded-full" />
+        <div className="absolute inset-0 border-4 border-zinc-200 dark:border-zinc-800 rounded-full" />
         <div className="absolute inset-0 border-4 border-transparent border-t-cucumber-green rounded-full" />
       </motion.div>
     </div>
@@ -19,7 +19,7 @@ export default function LoadingSpinner() {
 
 export function SkeletonLine({ className = "" }: { className?: string }) {
   return (
-    <div className={`animate-pulse bg-zinc-800 rounded ${className}`} />
+    <div className={`animate-pulse bg-zinc-200 dark:bg-zinc-800 rounded ${className}`} />
   );
 }
 
@@ -36,7 +36,7 @@ export function SkeletonText() {
 
 export function SkeletonCard() {
   return (
-    <div className="p-6 border border-white/[0.08] rounded-md space-y-4 animate-pulse">
+    <div className="p-6 border border-zinc-200 dark:border-white/[0.08] rounded-md space-y-4 animate-pulse">
       <SkeletonLine className="h-6 w-1/3" />
       <SkeletonLine className="h-4 w-full" />
       <SkeletonLine className="h-4 w-5/6" />

@@ -32,8 +32,8 @@ const NavGroup = memo(function NavGroup({ item, level = 0, onLinkClick }: { item
         prefetch={true}
         className={`flex items-center gap-3 px-3 py-2 text-[13px] rounded-md transition-all duration-200 active:scale-98 ${
           isActive
-            ? 'text-white bg-cucumber-green/10 border-l-2 border-cucumber-green'
-            : 'text-zinc-500 hover:text-white hover:bg-white/5'
+            ? 'text-zinc-900 dark:text-white bg-cucumber-green/10 border-l-2 border-cucumber-green'
+            : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5'
         }`}
         style={{ paddingLeft: `${level * 12 + 12}px` }}
       >
@@ -47,7 +47,7 @@ const NavGroup = memo(function NavGroup({ item, level = 0, onLinkClick }: { item
     <div>
       <button
         onClick={toggleOpen}
-        className="flex items-center justify-between w-full px-3 py-2 text-[13px] text-zinc-500 hover:text-white hover:bg-white/5 rounded-md transition-colors active:scale-98"
+        className="flex items-center justify-between w-full px-3 py-2 text-[13px] text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 rounded-md transition-colors active:scale-98"
         style={{ paddingLeft: `${level * 12 + 12}px` }}
         aria-expanded={isOpen}
       >
@@ -62,7 +62,7 @@ const NavGroup = memo(function NavGroup({ item, level = 0, onLinkClick }: { item
           <ChevronDown className="h-4 w-4" />
         </motion.div>
       </button>
-      
+
       <AnimatePresence initial={false}>
         {isOpen && hasChildren && (
           <motion.div
@@ -111,12 +111,12 @@ const MobileSidebar = memo(function MobileSidebar({ isOpen, onClose }: MobileSid
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
-    
+
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     }
-    
+
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
@@ -138,7 +138,7 @@ const MobileSidebar = memo(function MobileSidebar({ isOpen, onClose }: MobileSid
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+            className="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm z-40 lg:hidden"
           />
 
           {/* Drawer */}
@@ -150,14 +150,14 @@ const MobileSidebar = memo(function MobileSidebar({ isOpen, onClose }: MobileSid
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            className="fixed left-0 top-0 bottom-0 w-[280px] bg-zinc-900 border-r border-white/[0.08] z-50 lg:hidden overflow-y-auto smooth-scroll custom-scrollbar gpu-accelerated"
+            className="fixed left-0 top-0 bottom-0 w-[280px] bg-white dark:bg-zinc-900 border-r border-zinc-200 dark:border-white/[0.08] z-50 lg:hidden overflow-y-auto smooth-scroll custom-scrollbar gpu-accelerated"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-white/[0.08]">
-              <h2 className="text-sm font-semibold text-white">Navigation</h2>
+            <div className="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-white/[0.08]">
+              <h2 className="text-sm font-semibold text-zinc-900 dark:text-white">Navigation</h2>
               <button
                 onClick={onClose}
-                className="p-2 text-zinc-400 hover:text-white transition-colors rounded-md hover:bg-white/5"
+                className="p-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors rounded-md hover:bg-zinc-100 dark:hover:bg-white/5"
                 aria-label="Close menu"
               >
                 <X className="h-5 w-5" />

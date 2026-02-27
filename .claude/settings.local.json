@@ -4,7 +4,13 @@
       "Bash(npx next build:*)",
       "mcp__Claude_Preview__preview_start",
       "Bash(ls:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "WebFetch(domain:docs.cucumber.trade)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(cmd /c \"taskkill /PID 12620 /F\")",
+      "Bash(find:*)"
     ]
   }
 }

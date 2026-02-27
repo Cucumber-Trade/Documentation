@@ -20,8 +20,8 @@ const NavGroup = memo(function NavGroup({ item, level = 0 }: { item: NavItem; le
         prefetch={true}
         className={`relative flex items-center gap-3 py-2 text-[13px] rounded-md transition-all duration-200 ${
           isActive
-            ? 'text-white bg-cucumber-green/8 font-medium'
-            : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.03]'
+            ? 'text-zinc-900 dark:text-white bg-cucumber-green/8 font-medium'
+            : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-100/50 dark:hover:bg-white/[0.03]'
         }`}
         style={{ paddingLeft: `${level * 14 + 16}px`, paddingRight: '12px' }}
       >
@@ -66,7 +66,7 @@ const Sidebar = memo(function Sidebar() {
   }
 
   return (
-    <aside className="fixed left-0 top-[7rem] bottom-0 w-[260px] border-r border-white/[0.06] bg-black/30 backdrop-blur-xl hidden lg:block overflow-y-auto smooth-scroll custom-scrollbar">
+    <aside className="fixed left-0 top-[7rem] bottom-0 w-[260px] border-r border-zinc-200 dark:border-white/[0.06] bg-white/80 dark:bg-black/30 backdrop-blur-xl hidden lg:block overflow-y-auto smooth-scroll custom-scrollbar transition-colors duration-200">
       <nav className="px-3 py-6 space-y-1 contain-paint">
         {sidebar.map((item, index) => (
           <NavGroup key={`${item.name}-${index}`} item={item} />

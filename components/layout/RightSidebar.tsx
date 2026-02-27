@@ -29,7 +29,7 @@ const RightSidebar = memo(function RightSidebar() {
         top: offsetPosition,
         behavior: 'smooth'
       });
-      
+
       // Update URL without triggering navigation
       window.history.pushState(null, '', `#${id}`);
       setActiveId(id);
@@ -117,7 +117,7 @@ const RightSidebar = memo(function RightSidebar() {
   }
 
   return (
-    <aside className="fixed right-0 top-[7rem] bottom-0 w-[240px] border-l border-white/[0.08] bg-zinc-900/50 backdrop-blur-md hidden xl:block overflow-y-auto smooth-scroll custom-scrollbar">
+    <aside className="fixed right-0 top-[7rem] bottom-0 w-[240px] border-l border-zinc-200 dark:border-white/[0.08] bg-white/80 dark:bg-zinc-900/50 backdrop-blur-md hidden xl:block overflow-y-auto smooth-scroll custom-scrollbar transition-colors duration-200">
       <nav className="p-6 contain-paint">
         <h4 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-4">
           On this page
@@ -147,7 +147,7 @@ const RightSidebar = memo(function RightSidebar() {
                       className={`relative flex items-center text-[13px] py-1.5 transition-all duration-200 ${
                         isActive
                           ? 'text-cucumber-green font-semibold translate-x-1'
-                          : 'text-zinc-500 hover:text-white hover:translate-x-0.5'
+                          : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:translate-x-0.5'
                       }`}
                     >
                       <AnimatePresence>

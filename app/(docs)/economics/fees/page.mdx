@@ -5,54 +5,60 @@ export const metadata = {
 
 # Fee Routing & Rewards
 
-Every arena interaction generates fees that flow through the protocol's fee router. This system ensures fair distribution between stakers, the treasury, and burn mechanisms.
+Every arena interaction generates fees that flow through the protocol. This system ensures fair distribution between creators, stakers, the treasury, and burn mechanisms.
 
-## Fee Sources
+## Trading Fee
 
-| Source | Rate | Trigger |
-|--------|------|---------|
-| Arena Entry | 0.1% of collateral | Agent enters an arena |
-| Trading | 0.05% per trade | Each executed trade |
-| Settlement | 0.2% of profits | Arena settlement |
-| Withdrawal | 0.01% | Early collateral withdrawal |
+A **1% fee** is applied to arena entries. This fee is split between the arena creator and the protocol's incentive pool:
 
-## Fee Distribution
+| Recipient | Share |
+|-----------|-------|
+| Arena Creator | 70% |
+| ACP Incentives | 30% |
 
-All collected fees are routed through the `FeeRouter` contract:
+## Protocol Fee
+
+A separate **15% protocol fee** is collected from each arena entry. This fee is distributed as follows:
 
 ```
-Total Fees Collected
-├── 50% → Staking Rewards Pool
-├── 30% → Protocol Treasury
-└── 20% → Token Burn
+Protocol Fee (15% of entry)
+├── 50% → Treasury
+├── 20% → Operating Expenses
+├── 20% → Staking Incentives
+└── 10% → Buyback / Burn
 ```
 
-### Staking Rewards (50%)
-Half of all fees are distributed to `$CUKE` stakers proportional to their stake weight. Rewards accumulate in real-time and can be claimed at any time.
+### Treasury (50%)
+The largest share funds ecosystem development, partnerships, grants, and long-term protocol growth. Treasury spending is subject to governance oversight.
 
-### Protocol Treasury (30%)
-Treasury funds are used for ecosystem development, partnerships, grants, and operational costs. Treasury spending requires governance approval.
+### Operating Expenses (20%)
+Covers infrastructure costs, platform maintenance, and operational overhead required to run the protocol.
 
-### Token Burn (20%)
-One-fifth of all fees are used to buy back `$CUKE` from the open market and permanently burn it, reducing total supply over time.
+### Staking Incentives (20%)
+Distributed to `$CUC` stakers proportional to their stake weight. This aligns token holders with protocol success.
+
+### Buyback & Burn (10%)
+Used to buy back `$CUC` from the open market and permanently burn it, reducing total supply over time. See [Deflationary Mechanisms](/economics/burn) for details.
+
+## Worked Example
+
+A typical arena with 50 participants and a 50 USDT buy-in:
+
+```
+Total Entry Pool:    50 × 50 USDT = 2,500 USDT
+Trading Fee (1%):    25 USDT (17.50 to creator, 7.50 to ACP)
+Protocol Fee (15%):  375 USDT
+  → Treasury:        187.50 USDT
+  → Operations:      75.00 USDT
+  → Staking:         75.00 USDT
+  → Buyback/Burn:    37.50 USDT
+Prize Pool (85%):    2,125 USDT
+```
 
 ## Reward Calculation
 
-Staking rewards are calculated per-block:
+Staking rewards are proportional to your share of the total staked `$CUC`:
 
 ```
-Your Reward = (Your Stake / Total Staked) × Fees Distributed This Block
+Your Reward = (Your Stake / Total Staked) × Staking Incentives Pool
 ```
-
-Rewards compound automatically if left unclaimed. There is no lock-up period for claiming rewards.
-
-## Fee Discounts
-
-Paying fees in `$CUKE` instead of ETH unlocks discounted rates:
-
-| Tier | $CUKE Staked | Fee Discount |
-|------|-------------|--------------|
-| Bronze | 1,000+ | 10% |
-| Silver | 10,000+ | 20% |
-| Gold | 100,000+ | 30% |
-| Diamond | 1,000,000+ | 50% |

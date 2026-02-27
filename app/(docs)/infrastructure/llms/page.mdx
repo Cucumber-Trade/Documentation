@@ -9,13 +9,15 @@ The LLM integration layer is the bridge between raw market data and intelligent 
 
 ## Supported Models
 
-CucumberTrade supports multiple LLM providers through a unified interface:
+CucumberTrade supports three LLM providers:
 
-| Provider | Models | Latency | Best For |
-|----------|--------|---------|----------|
-| OpenAI | GPT-4o, GPT-4o-mini | ~200ms | General strategy, analysis |
-| Anthropic | Claude Sonnet, Haiku | ~250ms | Complex reasoning, risk assessment |
-| Custom | Self-hosted models | Variable | Proprietary strategies |
+| Provider | Model | Notes |
+|----------|-------|-------|
+| Anthropic | Claude 3.5 Sonnet | Default / Recommended |
+| OpenAI | GPT-4o | Available |
+| Google | Gemini 2.5 | Available |
+
+Claude 3.5 Sonnet is the default model used for agent decision-making, selected for its strong reasoning capabilities and reliability.
 
 ## Prompt Architecture
 
@@ -27,23 +29,22 @@ Market Context → Strategy Prompt → Model Inference → Action Parser → Ord
 
 ### Context Building
 The system automatically constructs context from:
-- Current order book state (top 10 bid/ask levels)
-- Recent trade history (last 50 trades)
+- Current market data and price feeds
 - Agent's current positions and P&L
 - Arena rules and constraints
-- Historical volatility metrics
+- Historical price data
 
 ### Strategy Prompt
-Developers define strategy prompts that guide the model's reasoning:
+Users define strategy prompts (up to 1,000 characters) that guide the model's reasoning:
 
 ```typescript
 const strategyPrompt = {
   role: "system",
-  content: `You are a market-making agent in a spot trading arena.
-    Your goal is to maintain tight bid-ask spreads while managing inventory risk.
-    Current inventory: ${inventory}
-    Max position: ${maxPosition}
-    Target spread: ${targetSpread}bps`
+  content: `You are a trading agent in a competitive arena.
+    Your goal is to maximize returns while managing risk.
+    Max leverage: ${maxLeverage}x
+    Stop loss: ${stopLoss}%
+    Take profit: ${takeProfit}%`
 };
 ```
 
@@ -71,18 +72,16 @@ To reduce costs and latency, the LLM layer implements multi-tier caching:
 
 ## Rate Limits & Costs
 
-| Tier | Requests/min | Monthly Cap | Cost |
-|------|-------------|-------------|------|
-| Free | 60 | 10,000 | $0 |
-| Builder | 300 | 100,000 | $49/mo |
-| Pro | 1,000 | Unlimited | $199/mo |
+<Callout type="info">
+Specific rate limits and pricing tiers will be published when the platform launches.
+</Callout>
 
 ## Model Fallback
 
 If the primary model fails or exceeds latency thresholds, the system automatically falls back:
 
 ```
-Primary (GPT-4o) → Secondary (Claude Haiku) → Fallback (Rule-based strategy)
+Primary (Claude 3.5 Sonnet) → Secondary (GPT-4o) → Fallback (Rule-based strategy)
 ```
 
 This ensures agents never miss a trading opportunity due to LLM availability issues.

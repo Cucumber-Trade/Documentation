@@ -1,17 +1,18 @@
 'use client';
 
-import { Search, Github, Command, Menu, Sun, Moon } from 'lucide-react';
+import { Search, Github, Menu, Sun, Moon } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useNavigation } from '@/contexts/NavigationContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useState, useCallback, memo } from 'react';
 import MobileSidebar from './MobileSidebar';
 
 const Header = memo(function Header() {
   const { activeTab, tabs } = useNavigation();
+  const { theme, toggleTheme } = useTheme();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
 
   const handleSearchClick = useCallback(() => {
     const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true });
@@ -26,14 +27,10 @@ const Header = memo(function Header() {
     setMobileSidebarOpen(false);
   }, []);
 
-  const toggleDarkMode = useCallback(() => {
-    setDarkMode(prev => !prev);
-  }, []);
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-xl">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/50 backdrop-blur-xl transition-colors duration-200">
       {/* Main Header Row */}
-      <div className="border-b border-white/[0.08]">
+      <div className="border-b border-zinc-200 dark:border-white/[0.08]">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex h-16 items-center">
             {/* Left: Mobile Menu + Logo */}
@@ -41,7 +38,7 @@ const Header = memo(function Header() {
               {/* Mobile Sidebar Button */}
               <button
                 onClick={toggleMobileSidebar}
-                className="lg:hidden p-2 text-zinc-400 hover:text-white transition-colors rounded-md active:scale-95"
+                className="lg:hidden p-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors rounded-md active:scale-95"
                 aria-label="Toggle sidebar"
               >
                 <Menu className="h-5 w-5" />
@@ -54,12 +51,21 @@ const Header = memo(function Header() {
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   className="relative h-8 w-auto"
                 >
+                  {/* Dark mode: white logo, Light mode: black logo */}
+                  <Image
+                    src="/assets/logos/horizontal-logo-black.svg"
+                    alt="Logo"
+                    width={200}
+                    height={32}
+                    className="h-8 w-auto dark:hidden"
+                    priority
+                  />
                   <Image
                     src="/assets/logos/Main Horizontal Logo.svg"
                     alt="Logo"
                     width={200}
                     height={32}
-                    className="h-8 w-auto"
+                    className="h-8 w-auto hidden dark:block"
                     priority
                   />
                 </motion.div>
@@ -72,14 +78,10 @@ const Header = memo(function Header() {
                 onClick={handleSearchClick}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-2 w-full max-w-md px-4 py-2 bg-zinc-900/50 border border-white/[0.08] rounded-md text-[13px] text-zinc-500 hover:text-zinc-300 hover:border-white/20 transition-all duration-200"
+                className="flex items-center gap-2 w-full max-w-md px-4 py-2 bg-zinc-100 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/[0.08] rounded-md text-[13px] text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-200"
               >
                 <Search className="h-3.5 w-3.5 flex-shrink-0" />
                 <span className="hidden sm:inline flex-1 text-left">Search documentation...</span>
-                <kbd className="hidden lg:inline-flex items-center gap-0.5 px-2 py-1 text-[11px] bg-zinc-800/80 rounded border border-white/[0.08] text-zinc-400">
-                  <Command className="h-2.5 w-2.5" />
-                  <span>K</span>
-                </kbd>
               </motion.button>
             </div>
 
@@ -92,7 +94,7 @@ const Header = memo(function Header() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2 text-zinc-400 hover:text-white transition-colors"
+                className="p-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
                 aria-label="GitHub"
               >
                 <Github className="h-4 w-4" />
@@ -100,12 +102,12 @@ const Header = memo(function Header() {
 
               {/* X (Twitter) Icon */}
               <motion.a
-                href="https://x.com/TradeOnCucumber"
+                href="https://x.com/CucumberTrade"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2 text-zinc-400 hover:text-white transition-colors"
+                className="p-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
                 aria-label="X (Twitter)"
               >
                 <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
@@ -115,13 +117,13 @@ const Header = memo(function Header() {
 
               {/* Dark Mode Toggle */}
               <motion.button
-                onClick={toggleDarkMode}
+                onClick={toggleTheme}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2 text-zinc-400 hover:text-white transition-colors"
+                className="p-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
                 aria-label="Toggle dark mode"
               >
-                {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </motion.button>
             </div>
           </div>
@@ -129,7 +131,7 @@ const Header = memo(function Header() {
       </div>
 
       {/* Sub Header Row - Navigation Tabs */}
-      <div className="border-b border-white/[0.08]">
+      <div className="border-b border-zinc-200 dark:border-white/[0.08]">
         <div className="mx-auto max-w-7xl px-6">
           <nav className="hidden md:flex items-center gap-1 h-12">
             {tabs.map((tab) => {
@@ -142,7 +144,7 @@ const Header = memo(function Header() {
                   className="relative px-4 py-2 text-[13px] transition-colors duration-200"
                 >
                   <span className={`relative z-10 ${
-                    isActive ? 'text-white' : 'text-zinc-500 hover:text-white'
+                    isActive ? 'text-zinc-900 dark:text-white' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                   }`}>
                     {tab.name}
                   </span>
@@ -151,7 +153,7 @@ const Header = memo(function Header() {
                   {isActive && (
                     <motion.div
                       layoutId="activeTab"
-                      className="absolute inset-0 bg-white/5 rounded-md border border-white/10"
+                      className="absolute inset-0 bg-zinc-100 dark:bg-white/5 rounded-md border border-zinc-200 dark:border-white/10"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -171,8 +173,8 @@ const Header = memo(function Header() {
                   prefetch={true}
                   className={`flex-shrink-0 px-3 py-1.5 text-[13px] rounded-md transition-colors ${
                     isActive
-                      ? 'text-white bg-white/5 border border-white/10'
-                      : 'text-zinc-500 hover:text-white'
+                      ? 'text-zinc-900 dark:text-white bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10'
+                      : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                   }`}
                 >
                   {tab.name}

@@ -61,7 +61,7 @@ export default function Callout({ type = 'info', title, children }: CalloutProps
               {title}
             </h4>
           )}
-          <div className="text-zinc-300 text-sm leading-relaxed">
+          <div className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed">
             {children}
           </div>
         </div>

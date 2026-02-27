@@ -5,72 +5,52 @@ export const metadata = {
 
 # Staking & Vesting Logic
 
-Staking is the primary mechanism for earning protocol rewards and participating in governance. This page covers the staking contract, vesting schedules, and reward mechanics.
+Staking is the primary mechanism for earning protocol rewards and participating in governance. This page covers the staking design, vesting schedules, and reward mechanics.
 
 ## Staking Overview
 
 | Parameter | Value |
 |-----------|-------|
-| Minimum Stake | 100 $CUKE |
-| Lock Period | None (flexible staking) |
-| Unstaking Cooldown | 7 days |
-| Reward Frequency | Per-block accumulation |
-| Compound | Auto-compound available |
+| Token | $CUC |
+| Revenue Source | 20% of protocol fees |
+| Network | Base |
+
+<Callout type="info">
+Specific staking parameters — including minimum stake amounts, cooldown periods, and reward frequency — will be published when the staking contract is deployed.
+</Callout>
 
 ## How to Stake
 
 ### Via the App
 1. Navigate to **Staking** in the dashboard
-2. Enter the amount of `$CUKE` to stake
+2. Enter the amount of `$CUC` to stake
 3. Approve the token transfer
 4. Confirm the staking transaction
-5. Rewards begin accumulating immediately
-
-### Via Contract
-
-```solidity
-// Approve tokens first
-IERC20(cukeToken).approve(stakingContract, amount);
-
-// Stake
-IStaking(stakingContract).stake(amount);
-```
-
-### Via CLI
-
-```bash
-cucumber stake --amount 10000
-cucumber stake --claim    # Claim pending rewards
-cucumber stake --unstake 5000
-```
+5. Rewards begin accumulating based on your share of the total staked pool
 
 ## Vesting Schedules
 
-Team and ecosystem tokens follow strict vesting schedules enforced by smart contracts:
+Token allocations follow strict vesting schedules:
 
-### Team & Advisors
-- **Cliff**: 12 months (no tokens released)
-- **Vesting**: Linear over 24 months after cliff
-- **Total Duration**: 36 months
+### Team (25% — 250,000,000 $CUC)
+- **Vesting**: 6-month linear
+- **Period**: November 2026 – April 2027
 
-### Ecosystem Fund
-- **Cliff**: None
-- **Vesting**: Linear over 36 months
-- **Governed by**: Treasury multisig + governance vote
+### Team Initial Buy (18% — 180,000,000 $CUC)
+- **Vesting**: 6-month linear
+- **Period**: December 2025 – May 2026
 
-### Staking Emissions
-- **Total Pool**: 150,000,000 $CUKE
-- **Emission**: Decreasing schedule over 48 months
-- **Year 1**: 40% of pool emitted
-- **Year 2**: 30% of pool emitted
-- **Year 3**: 20% of pool emitted
-- **Year 4**: 10% of pool emitted
+### Sniper Tax Buyback (6.56% — 65,601,159 $CUC)
+- **Vesting**: 9-month linear
+- **Period**: February 2026 – October 2026
+
+### Unlocked at TGE
+- **Liquidity Pool**: 20.44% (204,398,841 $CUC)
+- **veVIRTUAL Airdrop**: 2% (20,000,000 $CUC)
+- **Virtuals Ecosystem Airdrop**: 3% (30,000,000 $CUC)
 
 ## Unstaking
 
-Unstaking initiates a **7-day cooldown period**:
-1. Request unstake — tokens are marked for withdrawal
-2. Wait 7 days — cooldown period (no rewards during this time)
-3. Withdraw — tokens are returned to your wallet
-
-The cooldown prevents rapid stake/unstake manipulation during governance votes.
+<Callout type="info">
+Unstaking mechanics — including cooldown periods and withdrawal rules — will be finalized and published prior to staking launch.
+</Callout>

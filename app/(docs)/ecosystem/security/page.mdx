@@ -9,33 +9,24 @@ Security is a top priority at CucumberTrade. All smart contracts undergo rigorou
 
 ## Audit History
 
-| Auditor | Scope | Date | Status |
-|---------|-------|------|--------|
-| Trail of Bits | Core contracts (Agent, Arena, Staking) | Q4 2024 | Completed |
-| OpenZeppelin | Token contract, Fee Router | Q1 2025 | Completed |
-| Cantina | Full protocol review | Q2 2025 | In Progress |
-
-All audit reports are published publicly after remediation of any findings.
+<Callout type="info">
+Audit information will be published as audits are completed. All audit reports will be made publicly available after remediation of any findings.
+</Callout>
 
 ## Security Practices
 
 ### Smart Contract Security
-- All contracts follow OpenZeppelin standards and patterns
-- Upgradeable proxy pattern with timelock governance
-- Comprehensive test coverage (>95% line coverage)
-- Formal verification of critical financial logic
+- All contracts follow established security standards and patterns
+- Comprehensive test coverage
 - Reentrancy guards on all external-facing functions
 
 ### Operational Security
-- Multi-signature wallets for treasury and admin functions (3-of-5)
-- Hardware security modules (HSM) for signing infrastructure
+- Multi-signature wallets for treasury and admin functions
 - Role-based access control (RBAC) across all admin functions
-- 48-hour timelock on all governance-executed changes
 
 ### Monitoring
 - Real-time anomaly detection on all contract interactions
 - Automated alerts for unusual trading patterns
-- On-chain monitoring with Forta and OpenZeppelin Defender
 
 ## Bug Bounty Program
 
@@ -48,6 +39,10 @@ We maintain an active bug bounty program with rewards based on severity:
 | Medium | Up to $5,000 | Griefing attacks, DoS vectors |
 | Low | Up to $1,000 | UI bugs, non-critical logic errors |
 
+<Callout type="info">
+Bug bounty reward amounts are subject to change. Final amounts are determined based on severity and impact.
+</Callout>
+
 ### Reporting
 
-Report vulnerabilities responsibly via security@cucumbertrade.com. Do not publicly disclose vulnerabilities before they are patched.
+Report vulnerabilities responsibly via hello@cucumber.trade. Do not publicly disclose vulnerabilities before they are patched.

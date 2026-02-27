@@ -27,8 +27,8 @@ export function Step({ title, children, stepNumber }: StepProps) {
       </div>
 
       <div>
-        <h3 id={id} className="text-lg font-semibold text-white mb-3 transition-colors duration-300 group-hover:text-cucumber-green">{title}</h3>
-        <div className="text-zinc-400 text-sm leading-relaxed space-y-3">
+        <h3 id={id} className="text-lg font-semibold text-zinc-900 dark:text-white mb-3 transition-colors duration-300 group-hover:text-cucumber-green">{title}</h3>
+        <div className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed space-y-3">
           {children}
         </div>
       </div>

@@ -171,3 +171,49 @@ export function getFirstPageInTab(tabId: string): string {
 
   return findFirstHref(tab.sidebar) || tab.href;
 }
+
+// Helper function to get a flat ordered list of all pages
+export function getAllPages(): { title: string; href: string }[] {
+  const pages: { title: string; href: string }[] = [];
+
+  for (const tab of tabs) {
+    // Add tab hub page
+    if (tab.href) {
+      pages.push({ title: tab.name, href: tab.href });
+    }
+
+    // Recursively add all sidebar children
+    const addChildren = (items: NavItem[]) => {
+      for (const item of items) {
+        if (item.href) {
+          pages.push({ title: item.name, href: item.href });
+        }
+        if (item.children) {
+          addChildren(item.children);
+        }
+      }
+    };
+
+    addChildren(tab.sidebar);
+  }
+
+  return pages;
+}
+
+// Helper function to get previous and next pages for a given path
+export function getAdjacentPages(pathname: string): {
+  prev: { title: string; href: string } | null;
+  next: { title: string; href: string } | null;
+} {
+  const pages = getAllPages();
+  const currentIndex = pages.findIndex((page) => page.href === pathname);
+
+  if (currentIndex === -1) {
+    return { prev: null, next: null };
+  }
+
+  return {
+    prev: currentIndex > 0 ? pages[currentIndex - 1] : null,
+    next: currentIndex < pages.length - 1 ? pages[currentIndex + 1] : null,
+  };
+}

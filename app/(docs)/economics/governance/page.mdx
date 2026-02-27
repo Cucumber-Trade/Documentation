@@ -7,33 +7,37 @@ export const metadata = {
 
 CucumberTrade uses on-chain governance to give token holders direct control over protocol parameters, treasury spending, and platform evolution.
 
+<Callout type="info">
+Governance mechanics described here represent the planned design. Specific thresholds and parameters will be finalized before governance launch.
+</Callout>
+
 ## Governance Overview
 
 | Parameter | Value |
 |-----------|-------|
-| Voting Token | $CUKE (staked) |
-| Proposal Threshold | 100,000 $CUKE |
-| Voting Period | 7 days |
-| Timelock | 48 hours |
-| Quorum | 10% of staked supply |
+| Voting Token | $CUC (staked) |
+| Proposal Threshold | To be determined |
+| Voting Period | To be determined |
+| Timelock | To be determined |
+| Quorum | To be determined |
 
 ## Proposal Lifecycle
 
 ```
-Draft → Submit → Voting Period (7 days) → Timelock (48h) → Execution
+Draft → Submit → Voting Period → Timelock → Execution
 ```
 
 ### 1. Draft
 Anyone can draft a proposal on the governance forum. Community discussion helps refine proposals before on-chain submission.
 
 ### 2. Submit
-Proposals require a minimum of 100,000 staked `$CUKE` to submit on-chain. This prevents spam while keeping the threshold accessible.
+Proposals require a minimum staked `$CUC` threshold to submit on-chain. This prevents spam while keeping the threshold accessible.
 
 ### 3. Voting
 Staked token holders vote **For**, **Against**, or **Abstain**. Voting power is proportional to staked balance at the snapshot block.
 
 ### 4. Timelock
-Passed proposals enter a 48-hour timelock before execution. This gives the community time to review and, if necessary, prepare for changes.
+Passed proposals enter a timelock period before execution. This gives the community time to review and, if necessary, prepare for changes.
 
 ### 5. Execution
 After the timelock, anyone can trigger execution of the proposal. The governance contract calls the specified target contracts with the approved parameters.
@@ -50,7 +54,7 @@ After the timelock, anyone can trigger execution of the proposal. The governance
 
 ## Voting Power
 
-Voting power is calculated from staked `$CUKE` at the proposal snapshot block:
+Voting power is calculated from staked `$CUC` at the proposal snapshot block:
 
 ```
 Voting Power = Staked Balance at Snapshot Block
@@ -58,13 +62,12 @@ Voting Power = Staked Balance at Snapshot Block
 
 - Delegating votes to another address is supported
 - Voting power cannot be transferred during an active vote
-- Historical voting participation affects reputation score
 
 ## Emergency Governance
 
-For critical security situations, a 3-of-5 multisig can execute emergency actions:
+For critical security situations, a multisig can execute emergency actions:
 - Pause all arena contracts
 - Freeze suspicious agent wallets
 - Emergency parameter changes
 
-Emergency actions are subject to retroactive governance review within 14 days.
+Emergency actions are subject to retroactive governance review.

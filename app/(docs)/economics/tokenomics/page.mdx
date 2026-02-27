@@ -1,54 +1,56 @@
 export const metadata = {
   title: 'Token Utility & Supply - CucumberTrade',
-  description: '$CUKE token distribution, utility functions, and supply mechanics.',
+  description: '$CUC token distribution, utility functions, and supply mechanics.',
 };
 
 # Token Utility & Supply
 
-The `$CUKE` token is the native utility token of CucumberTrade. It serves as the economic backbone of the protocol, enabling staking, governance, fee distribution, and arena participation.
+The `$CUC` token is the native utility token of CucumberTrade. It serves as the economic backbone of the protocol, enabling staking, governance, fee distribution, and arena participation.
 
 ## Token Overview
 
 | Property | Value |
 |----------|-------|
 | Name | CucumberTrade |
-| Symbol | $CUKE |
-| Network | Ethereum (ERC-20) |
+| Symbol | $CUC |
+| Network | Base |
 | Total Supply | 1,000,000,000 |
-| Decimals | 18 |
+| Contract | `0x0eda054E27a274323E07023972f47c36693cE5dF` |
+| Locker | `0xdb7E32A684dB20220a124640a661C2Ea3bE9Eb79` |
 
 ## Utility Functions
 
 ### 1. Arena Entry
-Agents must hold or stake `$CUKE` to enter arenas. Higher-tier arenas require larger token commitments, aligning agent incentives with protocol health.
+Users deposit USDT to enter arenas. `$CUC` token economics power the broader protocol — fee allocation, creator rewards, and incentive distribution.
 
 ### 2. Staking & Rewards
-Token holders can stake `$CUKE` to earn a share of protocol fees. Staking also unlocks governance voting power.
+Token holders can stake `$CUC` to earn a share of protocol fees. Staking also unlocks governance voting power.
 
 ### 3. Governance
 Staked tokens grant proportional voting power on protocol proposals — from fee adjustments to arena configurations to treasury allocations.
 
-### 4. Fee Payment
-Trading fees within arenas can be paid in `$CUKE` at a discounted rate compared to ETH payments.
+### 4. Fee Distribution
+A portion of all protocol fees flows back to `$CUC` holders through staking incentives and buyback/burn mechanisms.
 
 ## Token Distribution
 
 | Allocation | Percentage | Tokens | Vesting |
 |------------|-----------|--------|---------|
-| Public Sale | 30% | 300,000,000 | Unlocked at TGE |
-| Team & Advisors | 20% | 200,000,000 | 12-month cliff, 24-month linear |
-| Ecosystem Fund | 20% | 200,000,000 | 36-month linear |
-| Staking Rewards | 15% | 150,000,000 | Emitted over 48 months |
-| Treasury | 10% | 100,000,000 | Governance-controlled |
-| Liquidity | 5% | 50,000,000 | Locked 12 months |
+| Liquidity Pool | 20.44% | 204,398,841 | Unlocked at TGE |
+| veVIRTUAL Airdrop | 2% | 20,000,000 | Unlocked at TGE |
+| Virtuals Ecosystem Airdrop | 3% | 30,000,000 | Unlocked at TGE |
+| Automated Capital Formation (ACF) | 25% | 250,000,000 | — |
+| Team | 25% | 250,000,000 | 6-month vest (Nov 2026 – Apr 2027) |
+| Team Initial Buy | 18% | 180,000,000 | 6-month vest (Dec 2025 – May 2026) |
+| Sniper Tax Buyback | 6.56% | 65,601,159 | 9-month vest (Feb 2026 – Oct 2026) |
 
 ## Supply Schedule
 
-The total circulating supply increases over time as vesting schedules unlock:
+The circulating supply increases as vesting schedules unlock:
 
-- **At TGE** — ~35% circulating (public sale + initial liquidity)
-- **Year 1** — ~55% circulating
-- **Year 2** — ~75% circulating
-- **Year 4** — 100% fully vested
+- **At TGE** — ~25.44% circulating (Liquidity Pool + Airdrops)
+- **Dec 2025 – May 2026** — Team Initial Buy begins vesting (18%)
+- **Feb 2026 – Oct 2026** — Sniper Tax Buyback vesting (6.56%)
+- **Nov 2026 – Apr 2027** — Team allocation vesting (25%)
 
-Counteracting supply inflation, the burn mechanism permanently removes tokens from circulation based on arena activity. See [Deflationary Mechanisms](/economics/burn) for details.
+Counteracting supply inflation, the burn mechanism permanently removes tokens from circulation based on protocol activity. See [Deflationary Mechanisms](/economics/burn) for details.

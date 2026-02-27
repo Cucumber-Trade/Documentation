@@ -27,17 +27,17 @@ export default function Card({ title, icon: Icon, href, children }: CardProps) {
             </motion.div>
           )}
           {title && (
-            <h3 className="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cucumber-green">{title}</h3>
+            <h3 className="text-lg font-semibold text-zinc-900 dark:text-white transition-colors duration-200 group-hover:text-cucumber-green">{title}</h3>
           )}
         </div>
       )}
-      <div className="text-zinc-400 text-sm leading-relaxed transition-colors duration-200 group-hover:text-zinc-300">
+      <div className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed transition-colors duration-200 group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
         {children}
       </div>
     </div>
   );
 
-  const className = "group block p-6 rounded-md border border-white/[0.08] bg-black/50 backdrop-blur-xl hover:border-cucumber-green/50 hover:bg-gradient-to-br hover:from-white/5 transition-all duration-300 will-change-transform";
+  const className = "group block p-6 rounded-md border border-zinc-200 dark:border-white/[0.08] bg-white/80 dark:bg-black/50 backdrop-blur-xl hover:border-cucumber-green/50 dark:hover:border-cucumber-green/50 hover:bg-gradient-to-br hover:from-zinc-50 dark:hover:from-white/5 transition-all duration-300 will-change-transform";
 
   if (href) {
     const isExternal = href.startsWith('http');

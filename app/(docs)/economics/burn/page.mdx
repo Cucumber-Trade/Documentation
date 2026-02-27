@@ -5,40 +5,31 @@ export const metadata = {
 
 # Deflationary Mechanisms
 
-CucumberTrade implements multiple deflationary mechanisms to reduce the circulating supply of `$CUKE` over time, creating long-term value for holders.
+CucumberTrade implements deflationary mechanisms to reduce the circulating supply of `$CUC` over time, creating long-term value for holders.
 
 ## Burn Sources
 
-### 1. Fee Burns (Continuous)
-20% of all protocol fees are used to buy `$CUKE` from the open market and send it to the burn address (`0x000...dead`). This happens automatically through the `FeeRouter` contract.
+### 1. Protocol Fee Burns (Continuous)
+10% of all protocol fees are allocated to buying back `$CUC` from the open market and permanently removing it from circulation. See [Fee Routing & Rewards](/economics/fees) for the full fee breakdown.
 
-### 2. Arena Settlement Burns
-When an arena settles, an additional 0.1% of the total arena volume is burned. This scales the burn rate with protocol activity.
-
-### 3. Governance Burns
-The governance system can vote to execute one-time burns from the treasury. This provides a mechanism for the community to accelerate deflation if desired.
+### 2. Governance Burns
+The governance system may vote to execute one-time burns from the treasury. This provides a mechanism for the community to accelerate deflation if desired.
 
 ## Burn Mechanics
 
 ```
-Fee Collection → CUKE Buyback (DEX) → Transfer to Burn Address → Supply Reduced
+Protocol Fee Collection → CUC Buyback (DEX) → Transfer to Burn Address → Supply Reduced
 ```
 
-The buyback is executed through a time-weighted average price (TWAP) strategy to minimize market impact:
-
-1. Fees accumulate in the `BurnRouter` contract
-2. Every 6 hours, a keeper triggers a TWAP buyback
-3. Purchased tokens are sent to `0x000...000dead`
-4. Burn event is emitted and indexed
+The buyback/burn allocation (10% of the 15% protocol fee) is used to purchase `$CUC` from the open market and send it to a burn address, permanently removing tokens from circulation.
 
 ## Burn Tracking
 
 | Metric | Value |
 |--------|-------|
 | Total Burned to Date | Updated on-chain |
-| Burn Rate (30d avg) | Dynamic based on volume |
-| Remaining Supply | Total Supply - Burned |
-| Burn Address | `0x000...000dead` |
+| Burn Rate | Dynamic based on protocol activity |
+| Remaining Supply | Total Supply − Burned |
 
 All burns are verifiable on-chain. The burn address has no private key, making token recovery impossible.
 
@@ -46,7 +37,7 @@ All burns are verifiable on-chain. The burn address has no private key, making t
 
 As the protocol grows, the burn rate accelerates:
 - Higher arena activity → more fees → more burns
-- Governance can increase burn percentage
+- Governance can vote to increase the burn percentage
 - Supply is permanently deflationary (no minting function exists)
 
-The combination of fixed total supply, vesting unlocks, and continuous burns creates a supply curve that trends downward over the long term.
+The combination of fixed total supply (1,000,000,000 $CUC), vesting unlocks, and continuous burns creates a supply curve that trends downward over the long term.
