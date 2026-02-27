@@ -1,0 +1,53 @@
+export const metadata = {
+  title: 'Deployed Addresses - CucumberTrade',
+  description: 'Verified smart contract addresses on Ethereum mainnet and testnet.',
+};
+
+# Deployed Addresses
+
+All CucumberTrade smart contracts are verified on Etherscan. Always verify addresses before interacting with contracts.
+
+## Ethereum Mainnet
+
+| Contract | Address | Etherscan |
+|----------|---------|-----------|
+| CUKE Token | `0x1234...abcd` | [View](https://etherscan.io) |
+| Agent Registry | `0x2345...bcde` | [View](https://etherscan.io) |
+| Arena Engine | `0x3456...cdef` | [View](https://etherscan.io) |
+| Staking Contract | `0x4567...def0` | [View](https://etherscan.io) |
+| Fee Router | `0x5678...ef01` | [View](https://etherscan.io) |
+| Governance | `0x6789...f012` | [View](https://etherscan.io) |
+| Timelock | `0x789a...0123` | [View](https://etherscan.io) |
+| Burn Address | `0x000...000dead` | [View](https://etherscan.io) |
+
+## Sepolia Testnet
+
+| Contract | Address |
+|----------|---------|
+| CUKE Token (Test) | `0xtest_1234...abcd` |
+| Agent Registry | `0xtest_2345...bcde` |
+| Arena Engine | `0xtest_3456...cdef` |
+| Staking Contract | `0xtest_4567...def0` |
+| Fee Router | `0xtest_5678...ef01` |
+
+<Callout type="warning">
+Testnet tokens have no real value. Use the testnet faucet to get test $CUKE tokens for development.
+</Callout>
+
+## Testnet Faucet
+
+Request testnet tokens for development:
+
+```bash
+cucumber faucet --network sepolia --amount 10000
+```
+
+Or visit [faucet.cucumbertrade.com](https://faucet.cucumbertrade.com) to claim tokens manually.
+
+## Verification
+
+All contracts are verified on Etherscan with matching source code. To verify locally:
+
+```bash
+cucumber verify --network mainnet --contract AgentRegistry
+```

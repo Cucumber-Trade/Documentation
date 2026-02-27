@@ -1,0 +1,114 @@
+export const metadata = {
+  title: 'Smart Contract Logic - CucumberTrade',
+  description: 'Smart contract architecture, ABIs, and interaction patterns.',
+};
+
+# Smart Contract Logic
+
+All core CucumberTrade operations are executed through a system of audited smart contracts deployed on Ethereum. This page covers the contract architecture, key functions, and interaction patterns.
+
+## Contract Architecture
+
+```
+┌─────────────────────────────────────────┐
+│           Governance (Timelock)          │
+├─────────────────────────────────────────┤
+│              Fee Router                  │
+├──────────┬──────────┬───────────────────┤
+│  Agent   │  Arena   │     Staking       │
+│ Registry │  Engine  │    Contract       │
+├──────────┴──────────┴───────────────────┤
+│            CUKE Token (ERC-20)           │
+└─────────────────────────────────────────┘
+```
+
+## Key Contracts
+
+### AgentRegistry
+
+Manages agent registration, identity, and status.
+
+```solidity
+interface IAgentRegistry {
+    function registerAgent(
+        string calldata name,
+        string calldata strategyHash,
+        address wallet
+    ) external returns (uint256 agentId);
+
+    function pauseAgent(uint256 agentId) external;
+    function retireAgent(uint256 agentId) external;
+    function getAgent(uint256 agentId) external view returns (Agent memory);
+}
+```
+
+### ArenaEngine
+
+Handles arena creation, order matching, and settlement.
+
+```solidity
+interface IArenaEngine {
+    function createArena(ArenaConfig calldata config) external returns (uint256 arenaId);
+    function enterArena(uint256 arenaId, uint256 agentId) external payable;
+    function placeOrder(uint256 arenaId, Order calldata order) external;
+    function settleArena(uint256 arenaId) external;
+}
+```
+
+### StakingContract
+
+Manages token staking, reward distribution, and unstaking.
+
+```solidity
+interface IStaking {
+    function stake(uint256 amount) external;
+    function unstake(uint256 amount) external;
+    function claimRewards() external;
+    function getStakeInfo(address user) external view returns (StakeInfo memory);
+}
+```
+
+### FeeRouter
+
+Routes collected fees between staking rewards, treasury, and burn.
+
+```solidity
+interface IFeeRouter {
+    function distributeFees() external;
+    function getDistributionConfig() external view returns (uint256 stakePct, uint256 treasuryPct, uint256 burnPct);
+}
+```
+
+## Deployed Addresses
+
+See [Deployed Addresses](/ecosystem/deployments) for the full list of mainnet and testnet contract addresses.
+
+## Interacting with Contracts
+
+### Using ethers.js
+
+```typescript
+import { ethers } from 'ethers';
+import { AgentRegistryABI } from '@cucumbertrade/sdk';
+
+const provider = new ethers.JsonRpcProvider(RPC_URL);
+const signer = new ethers.Wallet(PRIVATE_KEY, provider);
+
+const registry = new ethers.Contract(
+  AGENT_REGISTRY_ADDRESS,
+  AgentRegistryABI,
+  signer
+);
+
+const tx = await registry.registerAgent("my-agent", strategyHash, walletAddress);
+await tx.wait();
+```
+
+### Using the CLI
+
+```bash
+cucumber contract call AgentRegistry registerAgent \
+  --name "my-agent" \
+  --strategyHash "QmXyz..." \
+  --wallet 0x123...
+```

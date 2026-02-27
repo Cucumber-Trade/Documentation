@@ -21,7 +21,7 @@ const RightSidebar = memo(function RightSidebar() {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const offset = 100; // Account for fixed header
+      const offset = 128; // Account for fixed header + sub-header
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -46,13 +46,21 @@ const RightSidebar = memo(function RightSidebar() {
 
     // Small delay to ensure DOM is fully rendered after navigation
     const timeoutId = setTimeout(() => {
-      // Extract h2 and h3 headings from the page
+      // Extract h2 and h3 headings from prose content only (exclude .not-prose cards)
       const headings = document.querySelectorAll('article h2, article h3');
-      const tocItems: TocItem[] = Array.from(headings).map((heading) => ({
-        id: heading.id,
-        text: heading.textContent || '',
-        level: parseInt(heading.tagName.charAt(1)),
-      }));
+      const tocItems: TocItem[] = Array.from(headings)
+        .filter((heading) => {
+          // Skip headings without a valid id
+          if (!heading.id) return false;
+          // Skip headings inside .not-prose containers (card titles, etc.)
+          if (heading.closest('.not-prose')) return false;
+          return true;
+        })
+        .map((heading) => ({
+          id: heading.id,
+          text: heading.textContent?.replace(/^Link to section\s*/, '') || '',
+          level: parseInt(heading.tagName.charAt(1)),
+        }));
       setToc(tocItems);
 
       // Reset active ID when page changes
@@ -87,7 +95,13 @@ const RightSidebar = memo(function RightSidebar() {
         }
       );
 
-      headings.forEach((heading) => observerRef.current?.observe(heading));
+      // Only observe headings that are in the TOC
+      const tocIds = new Set(tocItems.map(item => item.id));
+      headings.forEach((heading) => {
+        if (heading.id && tocIds.has(heading.id)) {
+          observerRef.current?.observe(heading);
+        }
+      });
     }, 100);
 
     return () => {
@@ -103,7 +117,7 @@ const RightSidebar = memo(function RightSidebar() {
   }
 
   return (
-    <aside className="fixed right-0 top-16 bottom-0 w-[240px] border-l border-white/[0.08] bg-zinc-900/50 backdrop-blur-md hidden xl:block overflow-y-auto smooth-scroll custom-scrollbar">
+    <aside className="fixed right-0 top-[7rem] bottom-0 w-[240px] border-l border-white/[0.08] bg-zinc-900/50 backdrop-blur-md hidden xl:block overflow-y-auto smooth-scroll custom-scrollbar">
       <nav className="p-6 contain-paint">
         <h4 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-4">
           On this page

@@ -1,0 +1,76 @@
+export const metadata = {
+  title: 'Staking & Vesting Logic - CucumberTrade',
+  description: 'Staking mechanisms, vesting schedules, and reward distribution.',
+};
+
+# Staking & Vesting Logic
+
+Staking is the primary mechanism for earning protocol rewards and participating in governance. This page covers the staking contract, vesting schedules, and reward mechanics.
+
+## Staking Overview
+
+| Parameter | Value |
+|-----------|-------|
+| Minimum Stake | 100 $CUKE |
+| Lock Period | None (flexible staking) |
+| Unstaking Cooldown | 7 days |
+| Reward Frequency | Per-block accumulation |
+| Compound | Auto-compound available |
+
+## How to Stake
+
+### Via the App
+1. Navigate to **Staking** in the dashboard
+2. Enter the amount of `$CUKE` to stake
+3. Approve the token transfer
+4. Confirm the staking transaction
+5. Rewards begin accumulating immediately
+
+### Via Contract
+
+```solidity
+// Approve tokens first
+IERC20(cukeToken).approve(stakingContract, amount);
+
+// Stake
+IStaking(stakingContract).stake(amount);
+```
+
+### Via CLI
+
+```bash
+cucumber stake --amount 10000
+cucumber stake --claim    # Claim pending rewards
+cucumber stake --unstake 5000
+```
+
+## Vesting Schedules
+
+Team and ecosystem tokens follow strict vesting schedules enforced by smart contracts:
+
+### Team & Advisors
+- **Cliff**: 12 months (no tokens released)
+- **Vesting**: Linear over 24 months after cliff
+- **Total Duration**: 36 months
+
+### Ecosystem Fund
+- **Cliff**: None
+- **Vesting**: Linear over 36 months
+- **Governed by**: Treasury multisig + governance vote
+
+### Staking Emissions
+- **Total Pool**: 150,000,000 $CUKE
+- **Emission**: Decreasing schedule over 48 months
+- **Year 1**: 40% of pool emitted
+- **Year 2**: 30% of pool emitted
+- **Year 3**: 20% of pool emitted
+- **Year 4**: 10% of pool emitted
+
+## Unstaking
+
+Unstaking initiates a **7-day cooldown period**:
+1. Request unstake — tokens are marked for withdrawal
+2. Wait 7 days — cooldown period (no rewards during this time)
+3. Withdraw — tokens are returned to your wallet
+
+The cooldown prevents rapid stake/unstake manipulation during governance votes.

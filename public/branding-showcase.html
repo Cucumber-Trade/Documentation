@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CucumberTrade — Branding Showcase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green: #55E461;
+      --blue: #53B2ED;
+      --black: #04070B;
+      --white: #FFFFFF;
+      --gray: #6B7173;
+      --zinc-400: #a1a1aa;
+      --zinc-500: #71717a;
+      --zinc-800: #27272a;
+      --zinc-900: #18181b;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Rubik', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ─── SECTION LAYOUT ─── */
+    .showcase-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .showcase-section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .section-desc {
+      font-size: 15px;
+      color: var(--zinc-400);
+      max-width: 600px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      text-align: center;
+      padding: 120px 40px 80px;
+      background: linear-gradient(180deg, rgba(85,228,97,0.04) 0%, transparent 60%);
+    }
+    .hero .logo-horizontal { height: 48px; margin-bottom: 32px; }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--zinc-400);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ─── COLOR PALETTE ─── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .color-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .color-swatch {
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      padding: 12px 16px;
+    }
+    .color-swatch span {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      color: white;
+    }
+    .color-info {
+      padding: 16px;
+      background: var(--zinc-900);
+    }
+    .color-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .color-hex {
+      font-size: 13px;
+      color: var(--zinc-500);
+      font-family: monospace;
+    }
+    .color-usage {
+      font-size: 12px;
+      color: var(--zinc-500);
+      margin-top: 6px;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    .type-scale { display: flex; flex-direction: column; gap: 32px; }
+    .type-row {
+      display: flex;
+      align-items: baseline;
+      gap: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-meta {
+      flex-shrink: 0;
+      width: 140px;
+      text-align: right;
+    }
+    .type-meta .weight {
+      font-size: 12px;
+      color: var(--green);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .type-meta .size {
+      font-size: 12px;
+      color: var(--zinc-500);
+      margin-top: 2px;
+    }
+    .type-sample { flex: 1; }
+
+    .weights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .weight-card {
+      padding: 24px;
+      background: var(--zinc-900);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .weight-card .letter {
+      font-size: 56px;
+      line-height: 1;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+    .weight-card .label {
+      font-size: 12px;
+      color: var(--zinc-500);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── UI COMPONENTS ─── */
+    .components-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 768px) { .components-grid { grid-template-columns: 1fr; } }
+
+    .component-box {
+      background: var(--zinc-900);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+    }
+    .component-box h4 {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--zinc-500);
+      margin-bottom: 24px;
+    }
+
+    /* Buttons */
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'Rubik', sans-serif;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--green);
+      color: var(--black);
+    }
+    .btn-primary:hover { background: #4cd856; transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.03); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--green);
+      padding: 10px 12px;
+    }
+    .btn-ghost:hover { background: rgba(85,228,97,0.08); }
+
+    /* Links */
+    .link-demos { display: flex; flex-direction: column; gap: 12px; }
+    .link-demo a {
+      color: var(--green);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .link-demo a:hover { color: var(--blue); }
+    .link-demo .desc { font-size: 12px; color: var(--zinc-500); margin-top: 2px; }
+
+    /* Badges */
+    .badge-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .badge-green { background: rgba(85,228,97,0.12); color: var(--green); }
+    .badge-blue { background: rgba(83,178,237,0.12); color: var(--blue); }
+    .badge-gray { background: rgba(107,113,115,0.2); color: var(--zinc-400); }
+
+    /* Code */
+    .code-block {
+      background: var(--black);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--zinc-400);
+      overflow-x: auto;
+    }
+    .code-block .keyword { color: var(--blue); }
+    .code-block .string { color: var(--green); }
+    .code-block .comment { color: var(--zinc-500); }
+    .code-block .func { color: #c4b5fd; }
+
+    /* Callouts */
+    .callout {
+      padding: 16px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .callout:last-child { margin-bottom: 0; }
+    .callout-info {
+      background: rgba(83,178,237,0.08);
+      border-left: 3px solid var(--blue);
+      color: var(--zinc-400);
+    }
+    .callout-success {
+      background: rgba(85,228,97,0.08);
+      border-left: 3px solid var(--green);
+      color: var(--zinc-400);
+    }
+    .callout-label {
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .callout-info .callout-label { color: var(--blue); }
+    .callout-success .callout-label { color: var(--green); }
+
+    /* ─── NAV MOCKUP ─── */
+    .nav-mockup {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    /* Header bar */
+    .mock-header {
+      display: flex;
+      align-items: center;
+      height: 56px;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(12px);
+    }
+    .mock-logo { height: 28px; }
+    .mock-search {
+      flex: 1;
+      margin: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: var(--zinc-900);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--zinc-500);
+      max-width: 400px;
+    }
+    .mock-search svg { flex-shrink: 0; }
+    .mock-icons { display: flex; gap: 4px; }
+    .mock-icons span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      color: var(--zinc-500);
+      border-radius: 6px;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .mock-icons span:hover { color: var(--white); }
+
+    /* Sub header */
+    .mock-subheader {
+      display: flex;
+      align-items: center;
+      height: 44px;
+      padding: 0 20px;
+      gap: 4px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mock-tab {
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--zinc-500);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mock-tab:hover { color: var(--white); }
+    .mock-tab.active {
+      color: var(--white);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Body */
+    .mock-body { display: flex; min-height: 360px; }
+
+    /* Sidebar */
+    .mock-sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      padding: 20px 16px;
+      background: rgba(0,0,0,0.3);
+    }
+    .mock-sidebar-header {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--zinc-500);
+      padding: 0 8px;
+      margin-bottom: 8px;
+    }
+    .mock-sidebar-item {
+      display: block;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--zinc-400);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      margin-bottom: 2px;
+    }
+    .mock-sidebar-item:hover { color: var(--white); background: rgba(255,255,255,0.03); }
+    .mock-sidebar-item.active {
+      color: var(--white);
+      background: rgba(85,228,97,0.08);
+      border-left: 2px solid var(--green);
+    }
+
+    /* Content area */
+    .mock-content {
+      flex: 1;
+      padding: 40px;
+    }
+    .mock-content h1 {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .mock-content p {
+      font-size: 15px;
+      color: var(--zinc-400);
+      line-height: 1.8;
+      max-width: 640px;
+      margin-bottom: 24px;
+    }
+    .mock-content .inline-code {
+      background: var(--zinc-900);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--green);
+      border: 1px solid var(--border);
+    }
+
+    /* ─── LOGO SHOWCASE ─── */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .logo-card {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .logo-preview {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+    .logo-preview img, .logo-preview svg { max-height: 80px; max-width: 100%; }
+    .logo-preview.dark-bg { background: var(--black); }
+    .logo-preview.light-bg { background: var(--white); }
+    .logo-card-info {
+      padding: 16px;
+      background: var(--zinc-900);
+      font-size: 13px;
+    }
+    .logo-card-info .name { font-weight: 600; margin-bottom: 2px; }
+    .logo-card-info .variant { color: var(--zinc-500); font-size: 12px; }
+
+    /* ─── GRADIENT SECTION ─── */
+    .gradient-demos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .gradient-card {
+      height: 120px;
+      border-radius: 12px;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+      border: 1px solid var(--border);
+    }
+    .gradient-card span {
+      font-size: 12px;
+      font-weight: 500;
+      color: white;
+      background: rgba(0,0,0,0.4);
+      padding: 4px 10px;
+      border-radius: 6px;
+      backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="hero">
+    <img src="/assets/logos/Main Horizontal Logo.svg" alt="CucumberTrade" class="logo-horizontal" />
+    <h1>Branding Showcase</h1>
+    <p>Visual reference for applying the CucumberTrade brand guidelines across the documentation site.</p>
+  </section>
+
+  <!-- ════════ 1. COLOR PALETTE ════════ -->
+  <section class="showcase-section">
+    <div class="section-label">01 / Colors</div>
+    <div class="section-title">Color Palette</div>
+    <div class="section-desc">Three core brand colors plus supporting secondary shades for UI elements.</div>
+
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #55E461;"><span>Primary</span></div>
+        <div class="color-info">
+          <div class="color-name">Cucumber Green</div>
+          <div class="color-hex">#55E461</div>
+          <div class="color-usage">Accents, active states, links, CTAs</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #04070B; border: 1px solid rgba(255,255,255,0.1);"><span>Primary</span></div>
+        <div class="color-info">
+          <div class="color-name">Cucumber Black</div>
+          <div class="color-hex">#04070B</div>
+          <div class="color-usage">Backgrounds, surfaces</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #FFFFFF;"><span style="color: #04070B; background: rgba(255,255,255,0.8);">Primary</span></div>
+        <div class="color-info">
+          <div class="color-name">White</div>
+          <div class="color-hex">#FFFFFF</div>
+          <div class="color-usage">Headings, primary text</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #53B2ED;"><span>Secondary</span></div>
+        <div class="color-info">
+          <div class="color-name">Cucumber Blue</div>
+          <div class="color-hex">#53B2ED</div>
+          <div class="color-usage">Hover states, info callouts, gradient pair</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #6B7173;"><span>Secondary</span></div>
+        <div class="color-info">
+          <div class="color-name">Cucumber Gray</div>
+          <div class="color-hex">#6B7173</div>
+          <div class="color-usage">Muted text, labels, disabled states</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gradients -->
+    <div style="margin-top: 48px;">
+      <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 20px;">Brand Gradients</h3>
+      <div class="gradient-demos">
+        <div class="gradient-card" style="background: linear-gradient(135deg, #55E461, #53B2ED);"><span>Green &rarr; Blue (text highlights)</span></div>
+        <div class="gradient-card" style="background: linear-gradient(180deg, #04070B, #326A8D);"><span>Black &rarr; Blue (logo background)</span></div>
+        <div class="gradient-card" style="background: linear-gradient(180deg, rgba(85,228,97,0.06), transparent);"><span>Green glow (hero sections)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ 2. TYPOGRAPHY ════════ -->
+  <section class="showcase-section">
+    <div class="section-label">02 / Typography</div>
+    <div class="section-title">Rubik Type Scale</div>
+    <div class="section-desc">Neo-grotesque sans-serif with slightly rounded corners. Used across all headings, body text, and UI elements.</div>
+
+    <div class="type-scale">
+      <div class="type-row">
+        <div class="type-meta"><div class="weight">H1 / Bold</div><div class="size">36px &middot; -0.03em</div></div>
+        <div class="type-sample" style="font-size: 36px; font-weight: 700; letter-spacing: -0.03em;">Getting Started with CucumberTrade</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="weight">H2 / Bold</div><div class="size">28px &middot; -0.02em</div></div>
+        <div class="type-sample" style="font-size: 28px; font-weight: 700; letter-spacing: -0.02em;">Architecture Overview</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="weight">H3 / Semi</div><div class="size">22px &middot; -0.01em</div></div>
+        <div class="type-sample" style="font-size: 22px; font-weight: 600; letter-spacing: -0.01em;">Installation Requirements</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="weight">H4 / Semi</div><div class="size">18px</div></div>
+        <div class="type-sample" style="font-size: 18px; font-weight: 600;">API Authentication</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="weight">Body / Regular</div><div class="size">15px &middot; 1.7</div></div>
+        <div class="type-sample" style="font-size: 15px; font-weight: 400; color: var(--zinc-400); line-height: 1.7;">CucumberTrade provides a robust infrastructure for building and deploying trading agents. The platform supports multiple arena types and comes with comprehensive API access for full programmatic control.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="weight">Small / Medium</div><div class="size">13px</div></div>
+        <div class="type-sample" style="font-size: 13px; font-weight: 500; color: var(--zinc-500);">Last updated 2 days ago &middot; 5 min read</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="weight">Caption / Regular</div><div class="size">11px &middot; 0.12em</div></div>
+        <div class="type-sample" style="font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--zinc-500);">On This Page</div>
+      </div>
+    </div>
+
+    <!-- Weight Cards -->
+    <h3 style="font-size: 18px; font-weight: 600; margin-top: 48px; margin-bottom: 4px;">Font Weights</h3>
+    <p style="font-size: 14px; color: var(--zinc-500); margin-bottom: 20px;">All available Rubik weights used across the interface.</p>
+    <div class="weights-grid">
+      <div class="weight-card"><div class="letter" style="font-weight: 300;">Ag</div><div class="label">Light 300</div></div>
+      <div class="weight-card"><div class="letter" style="font-weight: 400;">Ag</div><div class="label">Regular 400</div></div>
+      <div class="weight-card"><div class="letter" style="font-weight: 500;">Ag</div><div class="label">Medium 500</div></div>
+      <div class="weight-card"><div class="letter" style="font-weight: 600;">Ag</div><div class="label">Semi 600</div></div>
+      <div class="weight-card"><div class="letter" style="font-weight: 700;">Ag</div><div class="label">Bold 700</div></div>
+      <div class="weight-card"><div class="letter" style="font-weight: 800;">Ag</div><div class="label">Extra Bold 800</div></div>
+      <div class="weight-card"><div class="letter" style="font-weight: 900;">Ag</div><div class="label">Black 900</div></div>
+    </div>
+  </section>
+
+  <!-- ════════ 3. UI COMPONENTS ════════ -->
+  <section class="showcase-section">
+    <div class="section-label">03 / Components</div>
+    <div class="section-title">UI Elements</div>
+    <div class="section-desc">Core interactive and informational components styled to the brand system.</div>
+
+    <div class="components-grid">
+      <!-- Buttons -->
+      <div class="component-box">
+        <h4>Buttons</h4>
+        <div class="btn-row">
+          <button class="btn btn-primary">Get Started</button>
+          <button class="btn btn-secondary">View on GitHub</button>
+          <button class="btn btn-ghost">Learn more &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="component-box">
+        <h4>Badges &amp; Tags</h4>
+        <div class="badge-row">
+          <span class="badge badge-green">Stable</span>
+          <span class="badge badge-blue">Beta</span>
+          <span class="badge badge-gray">Deprecated</span>
+          <span class="badge badge-green">v2.1.0</span>
+          <span class="badge badge-blue">TypeScript</span>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div class="component-box">
+        <h4>Links</h4>
+        <div class="link-demos">
+          <div class="link-demo">
+            <a href="#">Introduction &rarr;</a>
+            <div class="desc">Green default, transitions to blue on hover</div>
+          </div>
+          <div class="link-demo">
+            <a href="#">API Reference &rarr;</a>
+            <div class="desc">Consistent across sidebar, content, and navigation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code -->
+      <div class="component-box">
+        <h4>Code Block</h4>
+        <div class="code-block">
+<span class="comment">// Initialize a trading agent</span>
+<span class="keyword">const</span> agent = <span class="keyword">new</span> <span class="func">CucumberAgent</span>({
+  name: <span class="string">"my-bot"</span>,
+  arena: <span class="string">"spot-trading"</span>,
+  strategy: <span class="string">"market-maker"</span>
+});
+
+<span class="keyword">await</span> agent.<span class="func">connect</span>();
+        </div>
+      </div>
+
+      <!-- Callouts -->
+      <div class="component-box" style="grid-column: 1 / -1;">
+        <h4>Callouts</h4>
+        <div class="callout callout-info">
+          <div class="callout-label">Info</div>
+          Make sure you have Node.js 18+ installed before proceeding with the setup.
+        </div>
+        <div class="callout callout-success">
+          <div class="callout-label">Tip</div>
+          Use the arena simulator to test your agent strategies without risking real funds.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ 4. NAVIGATION MOCKUP ════════ -->
+  <section class="showcase-section">
+    <div class="section-label">04 / Layout</div>
+    <div class="section-title">Navigation &amp; Page Structure</div>
+    <div class="section-desc">Full documentation layout showing header, sub-header tabs, sidebar navigation, and content area.</div>
+
+    <div class="nav-mockup">
+      <!-- Header -->
+      <div class="mock-header">
+        <img src="/assets/logos/Main Horizontal Logo.svg" alt="Logo" class="mock-logo" />
+        <div class="mock-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          Search documentation...
+        </div>
+        <div class="mock-icons">
+          <span title="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></span>
+          <span title="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+          <span title="Dark Mode"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        </div>
+      </div>
+
+      <!-- Sub header -->
+      <div class="mock-subheader">
+        <div class="mock-tab active">Getting Started</div>
+        <div class="mock-tab">Agents</div>
+        <div class="mock-tab">Arenas</div>
+        <div class="mock-tab">API</div>
+        <div class="mock-tab">Help</div>
+      </div>
+
+      <!-- Body -->
+      <div class="mock-body">
+        <!-- Sidebar -->
+        <div class="mock-sidebar">
+          <div class="mock-sidebar-header">Getting Started</div>
+          <a class="mock-sidebar-item active">Introduction</a>
+          <a class="mock-sidebar-item">Quick Start</a>
+          <a class="mock-sidebar-item">Installation</a>
+        </div>
+
+        <!-- Content -->
+        <div class="mock-content">
+          <h1>Introduction</h1>
+          <p>Welcome to CucumberTrade, the ultimate trading infrastructure for modern finance. Build, test, and deploy autonomous trading agents in competitive arenas.</p>
+          <p>Get started by installing the CLI with <span class="inline-code">npm install -g cucumber-cli</span> and create your first agent in minutes.</p>
+          <div style="display: flex; gap: 12px;">
+            <button class="btn btn-primary" style="font-size: 13px; padding: 8px 16px;">Quick Start &rarr;</button>
+            <button class="btn btn-secondary" style="font-size: 13px; padding: 8px 16px;">View on GitHub</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ 5. LOGO SHOWCASE ════════ -->
+  <section class="showcase-section">
+    <div class="section-label">05 / Logo</div>
+    <div class="section-title">Logo Variants</div>
+    <div class="section-desc">Symbol and horizontal lockup on dark and light backgrounds.</div>
+
+    <div class="logo-grid">
+      <div class="logo-card">
+        <div class="logo-preview dark-bg">
+          <img src="/assets/logos/Main Horizontal Logo.svg" alt="Horizontal Logo" />
+        </div>
+        <div class="logo-card-info"><div class="name">Horizontal Logo</div><div class="variant">On dark background</div></div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-preview light-bg">
+          <svg viewBox="57 0 262 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-height: 40px;">
+            <path d="M57.4755 13.4217L42.3666 13.4441L19.0431 13.4272C16.3886 13.4253 14.0003 12.3889 11.9555 10.8404C10.425 9.57618 9.2495 8.12314 8.3125 6.38071L4.88574 0.00838176L42.7818 3.2589e-07C46.1094 -0.000736992 49.1791 1.24966 51.5004 3.58844C52.6792 4.76349 53.5649 6.08173 54.3361 7.56088L57.4755 13.4217Z" fill="#55E461"/>
+            <path d="M69.4687 47.6229L54.3597 47.6452L31.0363 47.6284C28.3818 47.6265 25.9935 46.59 23.9487 45.0415C22.4181 43.7774 21.2427 42.3243 20.3057 40.5819L16.8789 34.2095L54.7749 34.2012C58.1025 34.2004 61.1722 35.4508 63.4935 37.7896C64.6724 38.9647 65.5581 40.2829 66.3292 41.7621L69.4687 47.6229Z" fill="#55E461"/>
+            <path d="M33.4716 30.4641L14.5866 30.3242C11.6324 30.3023 8.93238 29.2783 6.72133 27.4007C5.48848 26.297 4.45624 25.1089 3.66412 23.646L0 16.8789L19.251 17.0538C22.8002 17.0861 25.9823 18.7944 28.2363 21.4348C29.0811 22.4291 29.7054 23.4363 30.3133 24.5852L33.4716 30.4641Z" fill="#55E461"/>
+            <path d="M90.4197 20.1242C90.4197 22.0954 90.6989 23.8202 91.2574 25.2986C91.8488 26.7769 92.6208 28.0254 93.5735 29.0438C94.5591 30.0294 95.6597 30.7686 96.8753 31.2614C98.0908 31.7542 99.3392 32.0006 100.621 32.0006C102.592 32.0006 104.448 31.4256 106.189 30.2758C107.93 29.0931 109.228 27.3026 110.082 24.9043H117.08C116.456 27.1055 115.569 29.0109 114.419 30.6207C113.302 32.2305 112.004 33.5775 110.526 34.6617C109.08 35.713 107.503 36.5014 105.795 37.0271C104.119 37.5527 102.411 37.8155 100.67 37.8155C98.5672 37.8155 96.4975 37.4377 94.4606 36.6821C92.4237 35.9265 90.6168 34.8095 89.0398 33.3311C87.4629 31.8199 86.1816 29.9637 85.196 27.7625C84.2433 25.5614 83.7669 23.0153 83.7669 20.1242C83.7669 17.2331 84.2433 14.687 85.196 12.4859C86.1816 10.2847 87.4629 8.44496 89.0398 6.96658C90.6168 5.45534 92.4237 4.32191 94.4606 3.56629C96.4975 2.77782 98.5672 2.38358 100.67 2.38358C102.411 2.38358 104.119 2.64641 105.795 3.17206C107.503 3.6977 109.08 4.5026 110.526 5.58675C112.004 6.63805 113.302 7.98502 114.419 9.62767C115.569 11.2375 116.456 13.1429 117.08 15.3441H110.082C109.655 14.1614 109.097 13.1265 108.407 12.2395C107.75 11.3196 106.994 10.564 106.14 9.97263C105.318 9.38128 104.431 8.93776 103.479 8.64208C102.526 8.34641 101.557 8.19857 100.571 8.19857C99.29 8.19857 98.0416 8.46139 96.826 8.98704C95.6104 9.47983 94.5263 10.219 93.5735 11.2046C92.6208 12.1902 91.8488 13.4386 91.2574 14.9499C90.6989 16.4282 90.4197 18.153 90.4197 20.1242Z" fill="#04070B"/>
+            <path d="M309.542 15.5412C310.528 14.4571 311.678 13.6357 312.992 13.0772C314.306 12.5187 315.669 12.2231 317.082 12.1902V18.0545C314.815 18.0545 313.041 18.5308 311.76 19.4836C310.478 20.4035 309.838 21.8818 309.838 23.9187V37.3228H303.53V14.1121C303.53 13.5865 303.711 13.1429 304.072 12.7816C304.466 12.3873 304.926 12.1902 305.452 12.1902C306.01 12.1902 306.487 12.3873 306.881 12.7816L309.542 15.5412Z" fill="#04070B"/>
+          </svg>
+        </div>
+        <div class="logo-card-info"><div class="name">Horizontal Logo</div><div class="variant">On light background (inverted text)</div></div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-preview dark-bg">
+          <svg width="80" height="80" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M571.053 322.662L457.738 322.829L282.815 322.703C262.906 322.689 244.994 314.915 229.658 303.302C218.179 293.82 209.363 282.923 202.336 269.855L176.636 222.063L460.852 222C485.808 221.994 508.831 231.372 526.24 248.913C535.082 257.726 541.724 267.612 547.508 278.706L571.053 322.662Z" fill="#55E461"/>
+            <path d="M660.999 579.164L547.684 579.332L372.761 579.206C352.852 579.191 334.94 571.418 319.604 559.804C308.126 550.323 299.31 539.426 292.282 526.358L266.582 478.566L550.798 478.503C575.755 478.497 598.777 487.875 616.187 505.416C625.028 514.229 631.671 524.115 637.454 535.209L660.999 579.164Z" fill="#55E461"/>
+            <path d="M391.034 450.473L249.398 449.424C227.241 449.26 206.992 441.58 190.409 427.498C181.163 419.221 173.421 410.31 167.481 399.338L140 348.586L284.38 349.898C310.999 350.14 334.865 362.952 351.77 382.754C358.105 390.211 362.788 397.766 367.347 406.382L391.034 450.473Z" fill="#55E461"/>
+          </svg>
+        </div>
+        <div class="logo-card-info"><div class="name">Symbol Mark</div><div class="variant">Standalone icon on dark background</div></div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-preview light-bg">
+          <svg width="80" height="80" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M571.053 322.662L457.738 322.829L282.815 322.703C262.906 322.689 244.994 314.915 229.658 303.302C218.179 293.82 209.363 282.923 202.336 269.855L176.636 222.063L460.852 222C485.808 221.994 508.831 231.372 526.24 248.913C535.082 257.726 541.724 267.612 547.508 278.706L571.053 322.662Z" fill="#55E461"/>
+            <path d="M660.999 579.164L547.684 579.332L372.761 579.206C352.852 579.191 334.94 571.418 319.604 559.804C308.126 550.323 299.31 539.426 292.282 526.358L266.582 478.566L550.798 478.503C575.755 478.497 598.777 487.875 616.187 505.416C625.028 514.229 631.671 524.115 637.454 535.209L660.999 579.164Z" fill="#55E461"/>
+            <path d="M391.034 450.473L249.398 449.424C227.241 449.26 206.992 441.58 190.409 427.498C181.163 419.221 173.421 410.31 167.481 399.338L140 348.586L284.38 349.898C310.999 350.14 334.865 362.952 351.77 382.754C358.105 390.211 362.788 397.766 367.347 406.382L391.034 450.473Z" fill="#55E461"/>
+          </svg>
+        </div>
+        <div class="logo-card-info"><div class="name">Symbol Mark</div><div class="variant">Standalone icon on light background</div></div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

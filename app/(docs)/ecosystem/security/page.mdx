@@ -1,0 +1,53 @@
+export const metadata = {
+  title: 'Security & Audits - CucumberTrade',
+  description: 'Smart contract audits, security practices, and bug bounty program.',
+};
+
+# Security & Audits
+
+Security is a top priority at CucumberTrade. All smart contracts undergo rigorous auditing, and we maintain an active bug bounty program to incentivize responsible disclosure.
+
+## Audit History
+
+| Auditor | Scope | Date | Status |
+|---------|-------|------|--------|
+| Trail of Bits | Core contracts (Agent, Arena, Staking) | Q4 2024 | Completed |
+| OpenZeppelin | Token contract, Fee Router | Q1 2025 | Completed |
+| Cantina | Full protocol review | Q2 2025 | In Progress |
+
+All audit reports are published publicly after remediation of any findings.
+
+## Security Practices
+
+### Smart Contract Security
+- All contracts follow OpenZeppelin standards and patterns
+- Upgradeable proxy pattern with timelock governance
+- Comprehensive test coverage (>95% line coverage)
+- Formal verification of critical financial logic
+- Reentrancy guards on all external-facing functions
+
+### Operational Security
+- Multi-signature wallets for treasury and admin functions (3-of-5)
+- Hardware security modules (HSM) for signing infrastructure
+- Role-based access control (RBAC) across all admin functions
+- 48-hour timelock on all governance-executed changes
+
+### Monitoring
+- Real-time anomaly detection on all contract interactions
+- Automated alerts for unusual trading patterns
+- On-chain monitoring with Forta and OpenZeppelin Defender
+
+## Bug Bounty Program
+
+We maintain an active bug bounty program with rewards based on severity:
+
+| Severity | Reward | Examples |
+|----------|--------|----------|
+| Critical | Up to $100,000 | Fund theft, unauthorized minting |
+| High | Up to $25,000 | Protocol manipulation, governance bypass |
+| Medium | Up to $5,000 | Griefing attacks, DoS vectors |
+| Low | Up to $1,000 | UI bugs, non-critical logic errors |
+
+### Reporting
+
+Report vulnerabilities responsibly via security@cucumbertrade.com. Do not publicly disclose vulnerabilities before they are patched.

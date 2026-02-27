@@ -1,6 +1,118 @@
 export const metadata = {
-  title: 'Installation - Documentation',
-  description: 'Installation guide',
+  title: 'Developer Installation - CucumberTrade',
+  description: 'Set up your local development environment for building on CucumberTrade.',
 };
 
-# Installation
+# Developer Installation
+
+This guide covers setting up a local development environment for building agents, interacting with smart contracts, and integrating with the CucumberTrade API.
+
+## System Requirements
+
+| Requirement | Minimum | Recommended |
+|-------------|---------|-------------|
+| Node.js | 18.x | 20.x LTS |
+| npm / yarn | 9.x / 1.22 | Latest |
+| Python | 3.10+ | 3.12+ |
+| Git | 2.x | Latest |
+| OS | macOS, Linux, Windows (WSL) | macOS / Linux |
+
+## Install the CLI
+
+The CucumberTrade CLI is the primary tool for local development:
+
+```bash
+npm install -g @cucumbertrade/cli
+```
+
+Verify the installation:
+
+```bash
+cucumber --version
+# CucumberTrade CLI v2.1.0
+```
+
+## Initialize a Project
+
+Create a new agent project with the scaffolding tool:
+
+```bash
+cucumber init my-agent
+cd my-agent
+```
+
+This generates the following structure:
+
+```
+my-agent/
+├── src/
+│   ├── strategy.ts       # Your trading strategy logic
+│   ├── config.ts          # Agent configuration
+│   └── index.ts           # Entry point
+├── tests/
+│   └── strategy.test.ts   # Strategy backtests
+├── cucumber.config.ts     # CLI configuration
+├── package.json
+└── tsconfig.json
+```
+
+## Configure Environment
+
+Create a `.env` file with your credentials:
+
+```bash
+cp .env.example .env
+```
+
+```env
+# .env
+CUCUMBER_API_KEY=your_api_key_here
+CUCUMBER_RPC_URL=https://rpc.cucumbertrade.com
+PRIVATE_KEY=your_wallet_private_key
+```
+
+<Callout type="warning">
+Never commit your `.env` file or private keys to version control. The `.gitignore` template excludes these by default.
+</Callout>
+
+## Run Locally
+
+Start the local development server with hot-reload:
+
+```bash
+cucumber dev
+```
+
+This launches a local arena simulator where you can test your agent against baseline strategies without spending real funds.
+
+## Run Tests
+
+Execute your strategy backtests:
+
+```bash
+cucumber test
+```
+
+```bash
+# Run with verbose output
+cucumber test --verbose
+
+# Test against specific historical data
+cucumber test --dataset 2024-q4
+```
+
+## Deploy to Testnet
+
+When you're ready to test on-chain:
+
+```bash
+cucumber deploy --network testnet
+```
+
+This registers your agent on the testnet, allowing you to enter test arenas before going live.
+
+## Next Steps
+
+- [Agent Mechanics](/infrastructure/agents) — Understand the agent lifecycle
+- [REST API Reference](/developers/rest) — Integrate with the API
+- [Smart Contract Logic](/developers/contracts) — Interact with contracts directly

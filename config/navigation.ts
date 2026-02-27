@@ -1,4 +1,4 @@
-import { Home, BookOpen, MessageSquare, Settings, Zap, Rocket, Code, Shield } from 'lucide-react';
+import { Rocket, Server, Coins, Code, Shield, LifeBuoy } from 'lucide-react';
 
 export interface NavItem {
   name: string;
@@ -14,80 +14,107 @@ export interface Tab {
   sidebar: NavItem[];
 }
 
-// Define the tabs that appear in the header
+// Define the tabs that appear in the sub-header
 export const tabs: Tab[] = [
   {
-    id: 'docs',
-    name: 'Docs',
+    id: 'getting-started',
+    name: 'Getting Started',
     href: '/',
     sidebar: [
       {
         name: 'Getting Started',
-        icon: Home,
-        children: [
-          { name: 'Introduction', href: '/' },
-          { name: 'Quick Start', href: '/quick-start' },
-          { name: 'Installation', href: '/installation' },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'trading-bots',
-    name: 'Trading Bots',
-    href: '/trading-bots',
-    sidebar: [
-      {
-        name: 'Overview',
-        icon: Code,
-        children: [
-          { name: 'What are Trading Bots?', href: '/trading-bots' },
-          { name: 'Bot Architecture', href: '/trading-bots/architecture' },
-        ],
-      },
-      {
-        name: 'Built-in Bots',
-        icon: Zap,
-        children: [
-          { name: 'Market Maker Bot', href: '/trading-bots/market-maker' },
-          { name: 'Custom Bots', href: '/trading-bots/custom' },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'api',
-    name: 'API',
-    href: '/api',
-    sidebar: [
-      {
-        name: 'API Reference',
-        icon: BookOpen,
-        children: [
-          { name: 'Overview', href: '/api' },
-          { name: 'Authentication', href: '/api/auth' },
-          { name: 'Endpoints', href: '/api/endpoints' },
-        ],
-      },
-      {
-        name: 'SDK',
-        icon: Code,
-        children: [
-          { name: 'JavaScript/TypeScript', href: '/api/sdk/js' },
-          { name: 'Python', href: '/api/sdk/python' },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'roadmap',
-    name: 'Roadmap',
-    href: '/roadmap',
-    sidebar: [
-      {
-        name: 'Roadmap',
         icon: Rocket,
-        href: '/roadmap',
+        children: [
+          { name: 'Vision & Roadmap', href: '/vision' },
+          { name: 'Platform Overview', href: '/overview' },
+          { name: 'User Quickstart', href: '/quick-start' },
+          { name: 'Developer Installation', href: '/installation' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'infrastructure',
+    name: 'Core Infrastructure',
+    href: '/infrastructure',
+    sidebar: [
+      {
+        name: 'Core Infrastructure',
+        icon: Server,
+        children: [
+          { name: 'Agent Mechanics', href: '/infrastructure/agents' },
+          { name: 'Arena Execution Engine', href: '/infrastructure/arenas' },
+          { name: 'LLM Integration Layer', href: '/infrastructure/llms' },
+          { name: 'Data Schemas', href: '/infrastructure/schemas' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'economics',
+    name: 'Protocol Economics',
+    href: '/economics',
+    sidebar: [
+      {
+        name: 'Protocol Economics',
+        icon: Coins,
+        children: [
+          { name: 'Token Utility & Supply', href: '/economics/tokenomics' },
+          { name: 'Fee Routing & Rewards', href: '/economics/fees' },
+          { name: 'Staking & Vesting Logic', href: '/economics/staking' },
+          { name: 'Deflationary Mechanisms', href: '/economics/burn' },
+          { name: 'Governance & Voting', href: '/economics/governance' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'developers',
+    name: 'Developer Interface',
+    href: '/developers',
+    sidebar: [
+      {
+        name: 'Developer Interface',
+        icon: Code,
+        children: [
+          { name: 'Smart Contract Logic', href: '/developers/contracts' },
+          { name: 'REST API Reference', href: '/developers/rest' },
+          { name: 'WebSocket Streams', href: '/developers/websocket' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'ecosystem',
+    name: 'Ecosystem & Trust',
+    href: '/ecosystem',
+    sidebar: [
+      {
+        name: 'Ecosystem & Trust',
+        icon: Shield,
+        children: [
+          { name: 'Security & Audits', href: '/ecosystem/security' },
+          { name: 'Deployed Addresses', href: '/ecosystem/deployments' },
+          { name: 'Partnership Program', href: '/ecosystem/partners' },
+          { name: 'Brand & Media Kit', href: '/ecosystem/branding' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'support',
+    name: 'Support & Guides',
+    href: '/support',
+    sidebar: [
+      {
+        name: 'Support & Guides',
+        icon: LifeBuoy,
+        children: [
+          { name: 'User Tutorials', href: '/support/tutorials' },
+          { name: 'Help Center & FAQs', href: '/support/help' },
+          { name: 'Contact & Community', href: '/support/contact' },
+          { name: 'Legal & Disclaimers', href: '/support/legal' },
+        ],
       },
     ],
   },
@@ -95,33 +122,41 @@ export const tabs: Tab[] = [
 
 // Helper function to get sidebar for a given path
 export function getSidebarForPath(pathname: string): NavItem[] {
-  // Find the matching tab based on the pathname
-  const matchingTab = tabs.find(tab => {
-    if (tab.href === '/') return true;
+  // Check specific tabs first (non-root paths)
+  const specificTab = tabs.find(tab => {
+    if (tab.href === '/') return false;
     return pathname.startsWith(tab.href);
   });
 
-  return matchingTab?.sidebar || [];
+  if (specificTab) return specificTab.sidebar;
+
+  // Fall back to root tab
+  const rootTab = tabs.find(tab => tab.href === '/');
+  return rootTab?.sidebar || [];
 }
 
 // Helper function to get active tab for a given path
 export function getActiveTab(pathname: string): string {
-  const matchingTab = tabs.find(tab => {
-    if (tab.href === '/') return true;
+  // Check specific tabs first (non-root paths)
+  const specificTab = tabs.find(tab => {
+    if (tab.href === '/') return false;
     return pathname.startsWith(tab.href);
   });
 
-  return matchingTab?.id || 'docs';
+  if (specificTab) return specificTab.id;
+
+  // Fall back to root tab
+  return tabs.find(tab => tab.href === '/')?.id || 'getting-started';
 }
 
 // Helper function to get the first page in a tab's sidebar
 export function getFirstPageInTab(tabId: string): string {
   const tab = tabs.find(t => t.id === tabId);
   if (!tab) return '/';
-  
+
   // If tab has a direct href, use it
   if (tab.href) return tab.href;
-  
+
   // Otherwise, find the first child with an href
   const findFirstHref = (items: NavItem[]): string | null => {
     for (const item of items) {
@@ -133,6 +168,6 @@ export function getFirstPageInTab(tabId: string): string {
     }
     return null;
   };
-  
+
   return findFirstHref(tab.sidebar) || tab.href;
 }

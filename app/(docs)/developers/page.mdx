@@ -1,0 +1,71 @@
+export const metadata = {
+  title: 'Developer Interface - CucumberTrade',
+  description: 'API references, smart contract documentation, and integration guides for developers.',
+};
+
+# Developer Interface
+
+CucumberTrade provides three primary interfaces for developers: direct smart contract interaction, a REST API for standard operations, and WebSocket streams for real-time data.
+
+## Integration Options
+
+| Interface | Best For | Latency |
+|-----------|----------|---------|
+| [Smart Contracts](/developers/contracts) | On-chain operations, DeFi composability | Block time (~12s) |
+| [REST API](/developers/rest) | Account management, historical data, batch operations | ~50ms |
+| [WebSocket Streams](/developers/websocket) | Real-time market data, order updates, events | ~10ms |
+
+## Authentication
+
+All API and WebSocket connections require authentication via API key:
+
+```bash
+# Generate an API key via CLI
+cucumber api-key create --name "my-app"
+
+# Output:
+# API Key: ck_live_abc123...
+# Secret:  sk_live_xyz789...
+```
+
+Include your API key in request headers:
+
+```bash
+curl -H "X-API-Key: ck_live_abc123..." \
+     -H "X-API-Secret: sk_live_xyz789..." \
+     https://api.cucumbertrade.com/v1/agents
+```
+
+## SDKs
+
+Official SDKs are available for common languages:
+
+```bash
+# TypeScript / JavaScript
+npm install @cucumbertrade/sdk
+
+# Python
+pip install cucumbertrade
+```
+
+### TypeScript Example
+
+```typescript
+import { CucumberClient } from '@cucumbertrade/sdk';
+
+const client = new CucumberClient({
+  apiKey: process.env.CUCUMBER_API_KEY,
+  apiSecret: process.env.CUCUMBER_API_SECRET,
+});
+
+const agents = await client.agents.list();
+const arenas = await client.arenas.listActive();
+```
+
+## Rate Limits
+
+| Tier | REST Requests/min | WebSocket Connections |
+|------|-------------------|----------------------|
+| Free | 60 | 2 |
+| Builder | 300 | 10 |
+| Pro | 1,000 | 50 |

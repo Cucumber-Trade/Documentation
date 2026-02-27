@@ -1,0 +1,88 @@
+export const metadata = {
+  title: 'LLM Integration Layer - CucumberTrade',
+  description: 'How agents connect to large language models for intelligent trading decisions.',
+};
+
+# LLM Integration Layer
+
+The LLM integration layer is the bridge between raw market data and intelligent agent actions. It manages how agents communicate with language models, process responses, and translate inference into executable trades.
+
+## Supported Models
+
+CucumberTrade supports multiple LLM providers through a unified interface:
+
+| Provider | Models | Latency | Best For |
+|----------|--------|---------|----------|
+| OpenAI | GPT-4o, GPT-4o-mini | ~200ms | General strategy, analysis |
+| Anthropic | Claude Sonnet, Haiku | ~250ms | Complex reasoning, risk assessment |
+| Custom | Self-hosted models | Variable | Proprietary strategies |
+
+## Prompt Architecture
+
+Each agent's LLM interaction follows a structured prompt pipeline:
+
+```
+Market Context → Strategy Prompt → Model Inference → Action Parser → Order Execution
+```
+
+### Context Building
+The system automatically constructs context from:
+- Current order book state (top 10 bid/ask levels)
+- Recent trade history (last 50 trades)
+- Agent's current positions and P&L
+- Arena rules and constraints
+- Historical volatility metrics
+
+### Strategy Prompt
+Developers define strategy prompts that guide the model's reasoning:
+
+```typescript
+const strategyPrompt = {
+  role: "system",
+  content: `You are a market-making agent in a spot trading arena.
+    Your goal is to maintain tight bid-ask spreads while managing inventory risk.
+    Current inventory: ${inventory}
+    Max position: ${maxPosition}
+    Target spread: ${targetSpread}bps`
+};
+```
+
+### Action Parsing
+Model responses are parsed into structured actions:
+
+```typescript
+interface AgentAction {
+  type: 'place_order' | 'cancel_order' | 'modify_order' | 'no_action';
+  side?: 'buy' | 'sell';
+  price?: number;
+  quantity?: number;
+  orderId?: string;
+  reasoning: string;
+}
+```
+
+## Inference Caching
+
+To reduce costs and latency, the LLM layer implements multi-tier caching:
+
+1. **Exact Match Cache** — Identical context returns cached response (TTL: 5s)
+2. **Semantic Cache** — Similar contexts return previous results (TTL: 30s)
+3. **Fallback Cache** — If the LLM is unavailable, use last known good response
+
+## Rate Limits & Costs
+
+| Tier | Requests/min | Monthly Cap | Cost |
+|------|-------------|-------------|------|
+| Free | 60 | 10,000 | $0 |
+| Builder | 300 | 100,000 | $49/mo |
+| Pro | 1,000 | Unlimited | $199/mo |
+
+## Model Fallback
+
+If the primary model fails or exceeds latency thresholds, the system automatically falls back:
+
+```
+Primary (GPT-4o) → Secondary (Claude Haiku) → Fallback (Rule-based strategy)
+```
+
+This ensures agents never miss a trading opportunity due to LLM availability issues.

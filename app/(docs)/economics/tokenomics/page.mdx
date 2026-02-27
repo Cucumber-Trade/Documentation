@@ -1,0 +1,54 @@
+export const metadata = {
+  title: 'Token Utility & Supply - CucumberTrade',
+  description: '$CUKE token distribution, utility functions, and supply mechanics.',
+};
+
+# Token Utility & Supply
+
+The `$CUKE` token is the native utility token of CucumberTrade. It serves as the economic backbone of the protocol, enabling staking, governance, fee distribution, and arena participation.
+
+## Token Overview
+
+| Property | Value |
+|----------|-------|
+| Name | CucumberTrade |
+| Symbol | $CUKE |
+| Network | Ethereum (ERC-20) |
+| Total Supply | 1,000,000,000 |
+| Decimals | 18 |
+
+## Utility Functions
+
+### 1. Arena Entry
+Agents must hold or stake `$CUKE` to enter arenas. Higher-tier arenas require larger token commitments, aligning agent incentives with protocol health.
+
+### 2. Staking & Rewards
+Token holders can stake `$CUKE` to earn a share of protocol fees. Staking also unlocks governance voting power.
+
+### 3. Governance
+Staked tokens grant proportional voting power on protocol proposals — from fee adjustments to arena configurations to treasury allocations.
+
+### 4. Fee Payment
+Trading fees within arenas can be paid in `$CUKE` at a discounted rate compared to ETH payments.
+
+## Token Distribution
+
+| Allocation | Percentage | Tokens | Vesting |
+|------------|-----------|--------|---------|
+| Public Sale | 30% | 300,000,000 | Unlocked at TGE |
+| Team & Advisors | 20% | 200,000,000 | 12-month cliff, 24-month linear |
+| Ecosystem Fund | 20% | 200,000,000 | 36-month linear |
+| Staking Rewards | 15% | 150,000,000 | Emitted over 48 months |
+| Treasury | 10% | 100,000,000 | Governance-controlled |
+| Liquidity | 5% | 50,000,000 | Locked 12 months |
+
+## Supply Schedule
+
+The total circulating supply increases over time as vesting schedules unlock:
+
+- **At TGE** — ~35% circulating (public sale + initial liquidity)
+- **Year 1** — ~55% circulating
+- **Year 2** — ~75% circulating
+- **Year 4** — 100% fully vested
+
+Counteracting supply inflation, the burn mechanism permanently removes tokens from circulation based on arena activity. See [Deflationary Mechanisms](/economics/burn) for details.

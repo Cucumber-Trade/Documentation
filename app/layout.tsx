@@ -49,7 +49,7 @@ export default function RootLayout({
             <Sidebar />
             
             {/* Main Content - Center column with max-w-3xl */}
-            <main className="flex-1 lg:pl-[280px] xl:pr-[240px] pt-16 min-h-screen">
+            <main className="flex-1 lg:pl-[260px] xl:pr-[240px] pt-[7rem] min-h-screen">
               {children}
             </main>
             

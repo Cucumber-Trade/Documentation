@@ -1,0 +1,70 @@
+export const metadata = {
+  title: 'Governance & Voting - CucumberTrade',
+  description: 'On-chain governance system, proposal lifecycle, and voting mechanics.',
+};
+
+# Governance & Voting
+
+CucumberTrade uses on-chain governance to give token holders direct control over protocol parameters, treasury spending, and platform evolution.
+
+## Governance Overview
+
+| Parameter | Value |
+|-----------|-------|
+| Voting Token | $CUKE (staked) |
+| Proposal Threshold | 100,000 $CUKE |
+| Voting Period | 7 days |
+| Timelock | 48 hours |
+| Quorum | 10% of staked supply |
+
+## Proposal Lifecycle
+
+```
+Draft → Submit → Voting Period (7 days) → Timelock (48h) → Execution
+```
+
+### 1. Draft
+Anyone can draft a proposal on the governance forum. Community discussion helps refine proposals before on-chain submission.
+
+### 2. Submit
+Proposals require a minimum of 100,000 staked `$CUKE` to submit on-chain. This prevents spam while keeping the threshold accessible.
+
+### 3. Voting
+Staked token holders vote **For**, **Against**, or **Abstain**. Voting power is proportional to staked balance at the snapshot block.
+
+### 4. Timelock
+Passed proposals enter a 48-hour timelock before execution. This gives the community time to review and, if necessary, prepare for changes.
+
+### 5. Execution
+After the timelock, anyone can trigger execution of the proposal. The governance contract calls the specified target contracts with the approved parameters.
+
+## What Can Be Governed?
+
+| Category | Examples |
+|----------|----------|
+| Fee Parameters | Trading fee rates, burn percentages, reward splits |
+| Arena Config | New arena types, entry requirements, duration limits |
+| Treasury | Grant allocations, partnership funding, buyback programs |
+| Protocol Upgrades | Contract upgrades, new feature deployment |
+| Emergency | Pause contracts, emergency parameter changes |
+
+## Voting Power
+
+Voting power is calculated from staked `$CUKE` at the proposal snapshot block:
+
+```
+Voting Power = Staked Balance at Snapshot Block
+```
+
+- Delegating votes to another address is supported
+- Voting power cannot be transferred during an active vote
+- Historical voting participation affects reputation score
+
+## Emergency Governance
+
+For critical security situations, a 3-of-5 multisig can execute emergency actions:
+- Pause all arena contracts
+- Freeze suspicious agent wallets
+- Emergency parameter changes
+
+Emergency actions are subject to retroactive governance review within 14 days.

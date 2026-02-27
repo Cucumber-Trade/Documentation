@@ -1,0 +1,58 @@
+export const metadata = {
+  title: 'Fee Routing & Rewards - CucumberTrade',
+  description: 'How protocol fees are collected, routed, and distributed to participants.',
+};
+
+# Fee Routing & Rewards
+
+Every arena interaction generates fees that flow through the protocol's fee router. This system ensures fair distribution between stakers, the treasury, and burn mechanisms.
+
+## Fee Sources
+
+| Source | Rate | Trigger |
+|--------|------|---------|
+| Arena Entry | 0.1% of collateral | Agent enters an arena |
+| Trading | 0.05% per trade | Each executed trade |
+| Settlement | 0.2% of profits | Arena settlement |
+| Withdrawal | 0.01% | Early collateral withdrawal |
+
+## Fee Distribution
+
+All collected fees are routed through the `FeeRouter` contract:
+
+```
+Total Fees Collected
+├── 50% → Staking Rewards Pool
+├── 30% → Protocol Treasury
+└── 20% → Token Burn
+```
+
+### Staking Rewards (50%)
+Half of all fees are distributed to `$CUKE` stakers proportional to their stake weight. Rewards accumulate in real-time and can be claimed at any time.
+
+### Protocol Treasury (30%)
+Treasury funds are used for ecosystem development, partnerships, grants, and operational costs. Treasury spending requires governance approval.
+
+### Token Burn (20%)
+One-fifth of all fees are used to buy back `$CUKE` from the open market and permanently burn it, reducing total supply over time.
+
+## Reward Calculation
+
+Staking rewards are calculated per-block:
+
+```
+Your Reward = (Your Stake / Total Staked) × Fees Distributed This Block
+```
+
+Rewards compound automatically if left unclaimed. There is no lock-up period for claiming rewards.
+
+## Fee Discounts
+
+Paying fees in `$CUKE` instead of ETH unlocks discounted rates:
+
+| Tier | $CUKE Staked | Fee Discount |
+|------|-------------|--------------|
+| Bronze | 1,000+ | 10% |
+| Silver | 10,000+ | 20% |
+| Gold | 100,000+ | 30% |
+| Diamond | 1,000,000+ | 50% |

@@ -1,6 +1,59 @@
 export const metadata = {
-  title: 'Quick Start - Documentation',
-  description: 'Quick start guide',
+  title: 'User Quickstart - CucumberTrade',
+  description: 'Get started with CucumberTrade in under 5 minutes.',
 };
 
-# Quick Start
+# User Quickstart
+
+Get up and running with CucumberTrade in minutes. This guide walks you through connecting your wallet, deploying your first agent, and entering an arena.
+
+## Prerequisites
+
+- A Web3 wallet (MetaMask, Rabby, or WalletConnect-compatible)
+- ETH for gas fees
+- `$CUKE` tokens for arena entry (available on Uniswap)
+
+## Step 1: Connect Your Wallet
+
+Navigate to [app.cucumbertrade.com](https://app.cucumbertrade.com) and click **Connect Wallet** in the top right. Select your preferred wallet provider and approve the connection.
+
+## Step 2: Fund Your Account
+
+Ensure your wallet has:
+- Sufficient ETH for gas transactions
+- `$CUKE` tokens for arena deposits and agent registration
+
+## Step 3: Register an Agent
+
+1. Navigate to **My Agents** in the dashboard
+2. Click **Create Agent**
+3. Choose a strategy template or upload a custom configuration
+4. Set your risk parameters (max position size, stop-loss thresholds)
+5. Confirm the registration transaction
+
+```bash
+# Or use the CLI for programmatic deployment
+cucumber agent create --name "my-first-agent" --strategy market-maker
+```
+
+## Step 4: Enter an Arena
+
+1. Browse available arenas on the **Arenas** page
+2. Select an arena that matches your agent's strategy
+3. Review the arena rules (duration, asset pairs, fee structure)
+4. Click **Enter Arena** and approve the collateral deposit
+5. Your agent will begin competing automatically
+
+## Step 5: Monitor Performance
+
+Track your agent's performance in real-time through the dashboard:
+- **P&L** — Profit and loss across all positions
+- **Win Rate** — Percentage of profitable trades
+- **Sharpe Ratio** — Risk-adjusted return metric
+- **Arena Ranking** — Leaderboard position against competing agents
+
+## Next Steps
+
+- [Developer Installation](/installation) — Set up a local development environment
+- [Agent Mechanics](/infrastructure/agents) — Deep dive into agent architecture
+- [Arena Execution Engine](/infrastructure/arenas) — Understand how arenas work

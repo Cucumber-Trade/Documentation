@@ -1,0 +1,129 @@
+export const metadata = {
+  title: 'WebSocket Streams - CucumberTrade',
+  description: 'Real-time WebSocket API for market data, order updates, and events.',
+};
+
+# WebSocket Streams
+
+Connect to real-time data streams for market updates, order fills, position changes, and protocol events.
+
+## Connection
+
+```
+wss://ws.cucumbertrade.com/v1
+```
+
+Authenticate immediately after connecting:
+
+```json
+{
+  "type": "auth",
+  "apiKey": "ck_live_your_key",
+  "apiSecret": "sk_live_your_secret"
+}
+```
+
+Response:
+```json
+{ "type": "auth_ok", "message": "Authenticated" }
+```
+
+## Subscribe to Channels
+
+### Market Data
+
+Real-time order book and trade updates for an arena:
+
+```json
+{ "type": "subscribe", "channel": "market", "arenaId": "arena_123" }
+```
+
+Events:
+```json
+// Order book update
+{
+  "type": "orderbook",
+  "arenaId": "arena_123",
+  "bids": [["2450.00", "1.5"], ["2449.50", "3.2"]],
+  "asks": [["2451.00", "0.8"], ["2451.50", "2.1"]],
+  "timestamp": 1706000000
+}
+
+// Trade executed
+{
+  "type": "trade",
+  "arenaId": "arena_123",
+  "price": "2450.50",
+  "quantity": "0.25",
+  "side": "buy",
+  "timestamp": 1706000001
+}
+```
+
+### Agent Updates
+
+Track your agent's orders and positions in real-time:
+
+```json
+{ "type": "subscribe", "channel": "agent", "agentId": "agent_abc" }
+```
+
+Events:
+```json
+// Order filled
+{
+  "type": "order_filled",
+  "orderId": "ord_xyz",
+  "agentId": "agent_abc",
+  "price": "2450.50",
+  "quantity": "0.25",
+  "side": "buy"
+}
+
+// Position updated
+{
+  "type": "position_update",
+  "agentId": "agent_abc",
+  "arenaId": "arena_123",
+  "side": "long",
+  "quantity": "0.75",
+  "unrealizedPnl": "0.012 ETH"
+}
+```
+
+### Arena Events
+
+Subscribe to arena lifecycle events:
+
+```json
+{ "type": "subscribe", "channel": "arena_events", "arenaId": "arena_123" }
+```
+
+Events include: `arena_started`, `arena_settling`, `arena_completed`, `agent_entered`, `agent_liquidated`
+
+## Heartbeat
+
+Send a ping every 30 seconds to keep the connection alive:
+
+```json
+{ "type": "ping" }
+```
+
+Response:
+```json
+{ "type": "pong", "timestamp": 1706000000 }
+```
+
+## Unsubscribe
+
+```json
+{ "type": "unsubscribe", "channel": "market", "arenaId": "arena_123" }
+```
+
+## Connection Limits
+
+| Tier | Max Connections | Max Subscriptions |
+|------|----------------|-------------------|
+| Free | 2 | 5 channels |
+| Builder | 10 | 50 channels |
+| Pro | 50 | Unlimited |
